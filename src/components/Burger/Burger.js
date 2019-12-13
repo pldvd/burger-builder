@@ -3,14 +3,20 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 import styles from './Burger.module.css';
 
 const burger = (props) => {
+
+const ingreds = Object.keys(props.ingredients).flatMap(key => {
+  return Array.from({length: props.ingredients[key]}, () => key);
+})
+
+console.log(ingreds);
+
   return (
     <div className={styles.Burger}>
-      <BurgerIngredient type="bread-top"></BurgerIngredient>
-      <BurgerIngredient type="salad"></BurgerIngredient>
-      <BurgerIngredient type="meat"></BurgerIngredient>
-      <BurgerIngredient type="cheese"></BurgerIngredient>
-      <BurgerIngredient type="meat"></BurgerIngredient>
-      <BurgerIngredient type="bread-bottom"></BurgerIngredient>
+      <BurgerIngredient type='bread-top' />
+      {
+        ingreds.map((ingr, index) => <BurgerIngredient type={ingr} key={index}/>)
+      }
+      <BurgerIngredient type='bread-bottom' />
     </div>
   );
 }
