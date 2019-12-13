@@ -1,9 +1,12 @@
 import React from 'react';
+import Layout from '../src/components/Layout/Layout';
 
 function App() {
   return (
     <div>
-      burger builder geccc
+      <Layout>
+        
+      </Layout>
     </div>
   );
 }
