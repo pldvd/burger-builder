@@ -1,0 +1,11 @@
+.BurgerControls {
+  width: 100%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Para {
+  display: inline-block;
+}
