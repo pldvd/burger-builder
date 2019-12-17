@@ -15,6 +15,7 @@ class BurgerBuilder extends Component {
         meat: 0,
       },
       finalPrice: 4,
+      isPurchasable: false,
     }
 
     this.IngredientPriceList = {
@@ -27,24 +28,35 @@ class BurgerBuilder extends Component {
 
   changeAmount = (lessOrMore, ingredient) => {
     if (lessOrMore === 'less') {
-      this.setState(prevState => ({
-        ingredients: {
-          ...prevState.ingredients,
-          [ingredient]: prevState.ingredients[ingredient] - 1,
-        },
-        finalPrice: prevState.finalPrice > 4 ? prevState.finalPrice - this.IngredientPriceList[ingredient] : prevState.finalPrice,
-      })
+      this.setState(prevState => {
+        return {
+          ingredients: {
+            ...prevState.ingredients,
+            [ingredient]: prevState.ingredients[ingredient] - 1,
+          },
+          finalPrice: prevState.finalPrice - this.IngredientPriceList[ingredient],
+        }
+      }, () => this.checkIfPurchasable(this.state.ingredients)
       );
     } else if (lessOrMore === 'more') {
-      this.setState(prevState => ({
-        ingredients: {
-          ...prevState.ingredients,
-          [ingredient]: prevState.ingredients[ingredient] + 1,
-        },
-        finalPrice: prevState.finalPrice + this.IngredientPriceList[ingredient],
-      })
+      this.setState(prevState => {
+        return {
+          ingredients: {
+            ...prevState.ingredients,
+            [ingredient]: prevState.ingredients[ingredient] + 1,
+          },
+          finalPrice: prevState.finalPrice + this.IngredientPriceList[ingredient],
+        }
+      }, () => this.checkIfPurchasable(this.state.ingredients)
       );
     }
+  }
+
+  //This will be added as a second parameter/callback to setState - this makes sure it runs once the state shows latest ingredients object
+  checkIfPurchasable = (ingredients) => {
+    const canPurchase = Object.values(ingredients).reduce((sum, currentVal) => sum + currentVal) > 0;
+
+    this.setState({isPurchasable: canPurchase});
   }
 
   render() {
@@ -53,8 +65,9 @@ class BurgerBuilder extends Component {
         <Burger ingredients={this.state.ingredients} />
         <BurgerControls
           ingredients={this.state.ingredients}
-          changeAmount={this.changeAmount} 
-          price={this.state.finalPrice}/>
+          changeAmount={this.changeAmount}
+          price={this.state.finalPrice}
+          canPurchase={this.state.isPurchasable} />
       </Fragment>
     )
   }
