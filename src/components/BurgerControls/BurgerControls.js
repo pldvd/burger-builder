@@ -1,10 +1,18 @@
 import React from 'react';
 import styles from './BurgerControls.module.css';
+import BurgerControl from './BurgerControl/BurgerControl';
 
-const burgerControls = (props) => (
-  <div className={styles.BurgerControls}>
-    <p className={styles.Para}>Zis is ze burger controlz</p>
-  </div>
-)
+const BurgerControls = (props) => {
+  const ingredNames = Object.keys(props.ingredients);
 
-export default burgerControls;
+  return (
+    <div className={styles.BurgerControls}>
+      {
+ingredNames.map(ingredient => <BurgerControl name={ingredient} key={ingredient}amount={props.ingredients[ingredient]} changeAmount={props.changeAmount}></BurgerControl>)
+      }
+    </div>
+  )
+}
+export default BurgerControls;
+
+//example to follow: https://burger-builder-1efe7.firebaseapp.com/
