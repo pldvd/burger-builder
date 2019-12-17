@@ -7,8 +7,13 @@ const BurgerControls = (props) => {
 
   return (
     <div className={styles.BurgerControls}>
+      <p>{props.price} USD</p>
       {
-ingredNames.map(ingredient => <BurgerControl name={ingredient} key={ingredient}amount={props.ingredients[ingredient]} changeAmount={props.changeAmount}></BurgerControl>)
+        ingredNames.map(ingredient => <BurgerControl
+          name={ingredient}
+          key={ingredient}
+          amount={props.ingredients[ingredient]}
+          changeAmount={props.changeAmount}></BurgerControl>)
       }
     </div>
   )

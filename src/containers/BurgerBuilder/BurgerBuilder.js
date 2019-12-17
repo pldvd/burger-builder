@@ -13,7 +13,15 @@ class BurgerBuilder extends Component {
         cheese: 1,
         bacon: 1,
         meat: 1,
-      }
+      },
+      finalPrice: 4.00,
+    }
+
+    this.IngredientPriceList = {
+      salad: 0.5,
+      cheese: 1,
+      bacon: 1,
+      meat: 2,
     }
   }
 
@@ -23,7 +31,8 @@ class BurgerBuilder extends Component {
         ingredients: {
           ...prevState.ingredients,
           [ingredient]: prevState.ingredients[ingredient] - 1,
-        }
+        },
+        finalPrice: prevState.finalPrice > 4 ? prevState.finalPrice - this.IngredientPriceList[ingredient] : prevState.finalPrice,
       })
       );
     } else if (lessOrMore === 'more') {
@@ -31,7 +40,8 @@ class BurgerBuilder extends Component {
         ingredients: {
           ...prevState.ingredients,
           [ingredient]: prevState.ingredients[ingredient] + 1,
-        }
+        },
+        finalPrice: prevState.finalPrice + this.IngredientPriceList[ingredient],
       })
       );
     }
@@ -41,7 +51,10 @@ class BurgerBuilder extends Component {
     return (
       <Fragment>
         <Burger ingredients={this.state.ingredients} />
-        <BurgerControls ingredients={this.state.ingredients} changeAmount={this.changeAmount} />
+        <BurgerControls
+          ingredients={this.state.ingredients}
+          changeAmount={this.changeAmount} 
+          price={this.state.finalPrice}/>
       </Fragment>
     )
   }
