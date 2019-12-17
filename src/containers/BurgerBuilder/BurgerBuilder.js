@@ -18,6 +18,7 @@ class BurgerBuilder extends Component {
       },
       finalPrice: 4,
       isPurchasable: false,
+      modalIsOpen: false,
     }
 
     this.IngredientPriceList = {
@@ -58,21 +59,28 @@ class BurgerBuilder extends Component {
   checkIfPurchasable = (ingredients) => {
     const canPurchase = Object.values(ingredients).reduce((sum, currentVal) => sum + currentVal) > 0;
 
-    this.setState({isPurchasable: canPurchase});
+    this.setState({ isPurchasable: canPurchase });
+  }
+
+  setModalVisibility = () => {
+    this.setState(prevState => (
+      { modalIsOpen: !prevState.modalIsOpen }
+    ));
   }
 
   render() {
     return (
       <Fragment>
-        <Modal>
-          <OrderSummary ingredients={this.state.ingredients}/>
+        <Modal isOpen={this.state.modalIsOpen}>
+          <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BurgerControls
           ingredients={this.state.ingredients}
           changeAmount={this.changeAmount}
           price={this.state.finalPrice}
-          canPurchase={this.state.isPurchasable} />
+          canPurchase={this.state.isPurchasable} 
+          setVisibility={this.setModalVisibility}/>
       </Fragment>
     )
   }

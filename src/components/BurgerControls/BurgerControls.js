@@ -15,7 +15,7 @@ const BurgerControls = (props) => {
           amount={props.ingredients[ingredient]}
           changeAmount={props.changeAmount}></BurgerControl>)
       }
-      <button disabled={!props.canPurchase}>order now</button>
+      <button onClick={props.setVisibility} disabled={!props.canPurchase}>order now</button>
     </div>
   )
 }

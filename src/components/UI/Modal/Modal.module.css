@@ -1,13 +1,6 @@
 .Modal {
   position: fixed;
   z-index: 2;
-  /* height: 100vh;
-  width: 100vw; */
-  /* top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, .3);
-
-  display: flex;
-  justify-content: center;
-  align-items: center; */
+  transition: all .3s linear;
+  transition-delay: .7s;
 }
