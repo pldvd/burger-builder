@@ -7,7 +7,7 @@ const BurgerControls = (props) => {
 
   return (
     <div className={styles.BurgerControls}>
-      <p>{props.price} USD</p>
+      <p>{props.price.toFixed(2)} USD</p>
       {
         ingredNames.map(ingredient => <BurgerControl
           name={ingredient}
@@ -15,6 +15,7 @@ const BurgerControls = (props) => {
           amount={props.ingredients[ingredient]}
           changeAmount={props.changeAmount}></BurgerControl>)
       }
+      <button>order now</button>
     </div>
   )
 }

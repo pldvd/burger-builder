@@ -9,16 +9,16 @@ class BurgerBuilder extends Component {
 
     this.state = {
       ingredients: {
-        salad: 1,
-        cheese: 1,
-        bacon: 1,
-        meat: 1,
+        salad: 0,
+        cheese: 0,
+        bacon: 0,
+        meat: 0,
       },
-      finalPrice: 4.00,
+      finalPrice: 4,
     }
 
     this.IngredientPriceList = {
-      salad: 0.5,
+      salad: .5,
       cheese: 1,
       bacon: 1,
       meat: 2,
