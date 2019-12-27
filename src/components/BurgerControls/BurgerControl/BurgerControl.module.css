@@ -1,5 +1,10 @@
 .BurgerControl {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  margin-left: 1rem;
 }

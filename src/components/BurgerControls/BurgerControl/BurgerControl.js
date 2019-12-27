@@ -7,8 +7,8 @@ const BurgerControl = (props) => {
     <div className={styles.BurgerControl}>
       <p>{props.name}</p>
       <p>{props.amount}</p>
-      <button onClick={() => props.changeAmount('less', props.name)} disabled={props.amount > 0 ? false : true}>Less</button>
-      <button onClick={() =>  props.changeAmount('more', props.name)}>More</button>
+      <button className={styles.btn} onClick={() => props.changeAmount('less', props.name)} disabled={props.amount > 0 ? false : true}>Less</button>
+      <button className={styles.btn} onClick={() =>  props.changeAmount('more', props.name)}>More</button>
     </div>
   );
 }
