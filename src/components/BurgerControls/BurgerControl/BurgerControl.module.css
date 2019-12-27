@@ -15,7 +15,7 @@
   border: none;
   border-radius: .5rem;
   color: rgba(255, 255, 255, .7);
-  background-color: green;
+  background-color: rebeccapurple;
   transition: all .3s;
 }
 
@@ -28,14 +28,25 @@
   border: none;
   border-radius: .5rem;
   color: rgba(255, 255, 255, .9);
-  background-color: red;
+  background-color: orangered;
   transition: all .3s;
 }
 
 .btn--less:hover {
-  transform: skewY(-5deg) scale(1.2);
+  transform: scale(1.2);
+  color: rgba(255, 255, 255, 1);
+}
+
+.btn--less:disabled {
+  color: rgba(255, 255, 255, .4);
 }
 
 .btn--more:hover {
-  transform: skewY(-5deg) scale(1.2);
+  transform: scale(1.2);
+  color: rgba(255, 255, 255, 1);
+}
+
+.text {
+  font-size: 1.6rem;
+  text-transform: capitalize;
 }
