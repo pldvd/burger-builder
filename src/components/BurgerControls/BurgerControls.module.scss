@@ -29,3 +29,10 @@
     color: rgba(255, 255, 255, .7);
   }
 }
+
+.price {
+  color: darken(rgb(99,109,97), 20%);
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}

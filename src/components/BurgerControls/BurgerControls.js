@@ -7,7 +7,7 @@ const BurgerControls = (props) => {
 
   return (
     <div className={styles.BurgerControls}>
-      <p>{props.price.toFixed(2)} USD</p>
+      <p className={styles.price}>Price: {props.price.toFixed(2)} USD</p>
       {
         ingredNames.map(ingredient => <BurgerControl
           name={ingredient}
