@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './OrderSummary.module.css';
+import styles from './OrderSummary.module.scss';
 
 const OrderSummary = (props) => {
   const finalOrder = Object.keys(props.ingredients).map(ingr => {
@@ -11,6 +11,7 @@ const OrderSummary = (props) => {
   })
   return (
     <div className={styles.OrderSummary}>
+      <p className={styles.closeIcon} onClick={props.setVisibility}>&times;</p>
       <h3>Your final order</h3>
       <p> A tasty burger with the following ingredients is coming up:</p>
       <ul>

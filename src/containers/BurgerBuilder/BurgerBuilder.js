@@ -72,7 +72,7 @@ class BurgerBuilder extends Component {
     return (
       <Fragment>
         <Modal isOpen={this.state.modalIsOpen}>
-          <OrderSummary ingredients={this.state.ingredients} />
+          <OrderSummary ingredients={this.state.ingredients} setVisibility={this.setModalVisibility}/>
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BurgerControls
