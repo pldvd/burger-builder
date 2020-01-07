@@ -6,4 +6,8 @@
   font-weight: bold;
   text-align: center;
   font-size: 2rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
