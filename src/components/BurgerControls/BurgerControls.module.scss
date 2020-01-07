@@ -1,0 +1,30 @@
+.BurgerControls {
+  padding: 5rem 0;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  border: none;
+  border-radius: .5rem;
+  background-color:  rgb(205,182,10);
+  transition: all .3s;
+  color: rgba(255, 255, 255, 1);
+
+  &:hover {
+    background-color: darken(rgb(205,182,10), 10%);
+    transform: scale(1.2);
+  }
+
+  &:disabled {
+    color: rgba(255, 255, 255, .7);
+  }
+}

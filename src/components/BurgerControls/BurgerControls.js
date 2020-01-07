@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BurgerControls.module.css';
+import styles from './BurgerControls.module.scss';
 import BurgerControl from './BurgerControl/BurgerControl';
 
 const BurgerControls = (props) => {
@@ -15,7 +15,7 @@ const BurgerControls = (props) => {
           amount={props.ingredients[ingredient]}
           changeAmount={props.changeAmount}></BurgerControl>)
       }
-      <button onClick={props.setVisibility} disabled={!props.canPurchase}>order now</button>
+      <button className={styles.btn} onClick={props.setVisibility} disabled={!props.canPurchase}>order now</button>
     </div>
   )
 }
