@@ -11,7 +11,7 @@ const burger = (props) => {
   return (
     <div className={styles.Burger}>
       <BurgerIngredient type='bread-top' />
-      { ingreds.length === 0 ? <p>Please add ingredients</p> :
+      { ingreds.length === 0 ? <p className={styles.p}>Please add ingredients</p> :
         ingreds.map((ingr, index) => <BurgerIngredient type={ingr} key={index} />)
       }
       <BurgerIngredient type='bread-bottom' />

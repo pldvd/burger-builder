@@ -16,7 +16,7 @@
   border-radius: .5rem;
   color: rgba(255, 255, 255, .9);
   transition: all .3s;
-  
+
 
   &--less {
     background-color: rgb(188,52,77);
@@ -31,10 +31,10 @@
   }
 
   &--more {
-    background-color: rgb(99,109,97);
+    background-color: rgb(163,153,106);
 
     &:hover {
-      background-color: darken(rgb(99,109,97), 10%);
+      background-color: darken(rgb(163,153,106), 10%);
     }
   }
 
@@ -47,4 +47,6 @@
 .text {
   font-size: 1.6rem;
   text-transform: capitalize;
+  color: darken(rgb(99,109,97), 20%);
+  font-size: 2rem;
 }

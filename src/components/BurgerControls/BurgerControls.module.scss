@@ -18,6 +18,7 @@
   background-color:  rgb(205,182,10);
   transition: all .3s;
   color: rgba(255, 255, 255, 1);
+  margin-top: 2rem;
 
   &:hover {
     background-color: darken(rgb(205,182,10), 10%);
