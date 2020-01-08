@@ -4,7 +4,7 @@ import styles from './OrderSummary.module.scss';
 const OrderSummary = (props) => {
   const finalOrder = Object.keys(props.ingredients).map(ingr => {
     return (
-      <li>
+      <li key={ingr}>
         <span>{ingr}: </span>{props.ingredients[ingr]}
       </li>
     );
