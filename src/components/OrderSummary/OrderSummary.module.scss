@@ -9,8 +9,8 @@
   font-size: 2rem;
   margin: 0;
   cursor: pointer;
-  transition: all .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
+  transition: all .3s;
+  
   &:hover {
     transform: scale(1.2)
   }
