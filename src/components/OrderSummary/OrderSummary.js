@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './OrderSummary.module.scss';
+import Button from '../UI/Button/Button';
 
 const OrderSummary = (props) => {
   const finalOrder = Object.keys(props.ingredients).map(ingr => {
@@ -17,6 +18,9 @@ const OrderSummary = (props) => {
       <ul>
         {finalOrder}
       </ul>
+      <p>Continue?</p>
+      <Button color="green" clicked={props.continueOrder}>Continue</Button>
+      <Button color="red" clicked={props.cancelOrder}>Cancel</Button>
     </div>
   )
 }

@@ -68,19 +68,41 @@ class BurgerBuilder extends Component {
     ));
   }
 
+  continueOrder = () => {
+    alert('you clicked continue')
+  }
+
+  cancelOrder = () => {
+    this.setState({
+      ingredients: {
+        salad: 0,
+        cheese: 0,
+        bacon: 0,
+        meat: 0,
+      },
+      finalPrice: 4,
+      isPurchasable: false,
+      modalIsOpen: false,
+    })
+  }
+
   render() {
     return (
       <Fragment>
         <Modal isOpen={this.state.modalIsOpen}>
-          <OrderSummary ingredients={this.state.ingredients} setVisibility={this.setModalVisibility}/>
+          <OrderSummary ingredients={this.state.ingredients}
+            setVisibility={this.setModalVisibility}
+            continueOrder={this.continueOrder}
+            cancelOrder={this.cancelOrder}
+          />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BurgerControls
           ingredients={this.state.ingredients}
           changeAmount={this.changeAmount}
           price={this.state.finalPrice}
-          canPurchase={this.state.isPurchasable} 
-          setVisibility={this.setModalVisibility}/>
+          canPurchase={this.state.isPurchasable}
+          setVisibility={this.setModalVisibility} />
       </Fragment>
     )
   }
