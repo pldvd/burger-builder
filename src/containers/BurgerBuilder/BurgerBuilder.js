@@ -94,6 +94,7 @@ class BurgerBuilder extends Component {
             setVisibility={this.setModalVisibility}
             continueOrder={this.continueOrder}
             cancelOrder={this.cancelOrder}
+            price={this.state.finalPrice}
           />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
