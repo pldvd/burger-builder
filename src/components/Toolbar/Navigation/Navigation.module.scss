@@ -1,0 +1,18 @@
+.Navigation {
+  list-style: none;
+  margin-right: auto;
+  display: flex;
+  font-size: 2rem;
+
+  & > * {
+    padding: 1rem;
+    cursor: pointer;
+    border-bottom: 0.4rem solid transparent;
+
+    @media (hover: hover) {
+      &:hover {
+        border-bottom: 0.4rem solid rgb(204, 203, 188);
+      }
+    }
+  }
+}
