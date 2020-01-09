@@ -1,3 +1,13 @@
 .SideDrawer {
-  
+  width: 70%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  background-color: white;
+  height: 100vh;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
 }

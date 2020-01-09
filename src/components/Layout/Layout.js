@@ -1,11 +1,20 @@
-import React, {Fragment} from 'react';
+import React, { Fragment, useState } from 'react';
 import Toolbar from '../Toolbar/Toolbar';
 import styles from './Layout.module.css';
+import SideDrawer from '../SideDrawer/SideDrawer';
 
 const Layout = (props) => {
+
+  const [sideIsOpen, toggleSideOpen] = useState(false);
+
+  function toggleOpen() {
+    toggleSideOpen(!sideIsOpen);
+  }
+
   return (
     <Fragment>
-      <Toolbar />
+      <Toolbar sideControl={toggleOpen} />
+      <SideDrawer isOpen={sideIsOpen} />
       <main className={styles.Content}>{props.children}</main>
     </Fragment>
   )

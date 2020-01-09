@@ -9,7 +9,7 @@ const Toolbar = (props) => {
     <header className={styles.Toolbar}>
       <img src={logoImage} alt={'Burger logo'} />
       <Navigation type='header' />
-      <HamburgerIcon />
+      <HamburgerIcon sideControl={props.sideControl}/>
     </header>
   )
 }
