@@ -4,7 +4,8 @@
   box-sizing: border-box;
   padding: 1rem 3rem;
   background-color: rgb(205,182,10);
-  position: fixed;
+  position: sticky;
+  // position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
@@ -17,9 +18,4 @@
     box-sizing: border-box;
     object-fit: contain;
   }
-
-  nav {
-    margin-right: auto;
-  }
-
 }

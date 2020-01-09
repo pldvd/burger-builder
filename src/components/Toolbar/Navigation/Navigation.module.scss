@@ -1,7 +1,5 @@
 .Navigation {
   list-style: none;
-  margin-right: auto;
-  display: flex;
   font-size: 2rem;
 
   & > * {
@@ -14,5 +12,13 @@
         border-bottom: 0.4rem solid rgb(204, 203, 188);
       }
     }
+  }
+}
+
+.header {
+  display: flex;
+
+  @media screen and (max-width: 31.25em) {
+    display: none;
   }
 }
