@@ -1,4 +1,9 @@
 .HamburgerIcon {
   margin-left: auto;
-  fill: red;
+  cursor: pointer;
+  transition: transform .2s;
+
+  &:active {
+    transform: scale(1.2);
+  }
 }
