@@ -1,0 +1,17 @@
+.Toolbar {
+  height: 5.6rem;
+  width: 100%;
+  background-color: rgb(204,203,188);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-start;
+
+  img {
+    width: 15%;
+    margin: 1rem 2rem;
+    object-fit: contain;
+  }
+}
