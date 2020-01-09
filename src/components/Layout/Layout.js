@@ -14,7 +14,7 @@ const Layout = (props) => {
   return (
     <Fragment>
       <Toolbar sideControl={toggleOpen} />
-      <SideDrawer isOpen={sideIsOpen} />
+      <SideDrawer isOpen={sideIsOpen} sideControl={toggleOpen}/>
       <main className={styles.Content}>{props.children}</main>
     </Fragment>
   )

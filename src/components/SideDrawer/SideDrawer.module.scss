@@ -11,3 +11,11 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.close {
+  margin: 0;
+  font-size: 4rem;
+  position: fixed;
+  top: 1rem;
+  right: 3rem;
+}
