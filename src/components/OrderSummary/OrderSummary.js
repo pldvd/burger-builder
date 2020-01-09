@@ -13,12 +13,12 @@ const OrderSummary = (props) => {
   return (
     <div className={styles.OrderSummary}>
       <p className={styles.closeIcon} onClick={props.setVisibility}>&times;</p>
-      <h3 style={{ fontSize: '1.2em', textTransform: 'uppercase' }}>Your final order</h3>
+      <h3 className={styles.header}>Your final order</h3>
       <p> A tasty burger with the following ingredients is coming up:</p>
-      <ul>
+      <ul className={styles.ingredients}>
         {finalOrder}
       </ul>
-      <p>The final price is<span style={{ fontSize: '1.2em' }}> {props.price.toFixed(2)} USD </span></p>
+      <p>The price is<span style={{ fontSize: '1.2em' }}> {props.price.toFixed(2)} USD </span></p>
       <Button color="green" clicked={props.continueOrder}>Continue</Button>
       <Button color="red" clicked={props.cancelOrder}>Cancel</Button>
     </div>

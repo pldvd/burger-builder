@@ -10,10 +10,13 @@
   display:flex;
   flex-direction: column;
   justify-content: center;
+
+  transition: transform .3s;
 }
 
 .close {
   margin: 0;
+  line-height: 1;
   font-size: 4rem;
   position: fixed;
   top: 1rem;

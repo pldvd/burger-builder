@@ -11,10 +11,12 @@
     padding: 1rem 2rem 0 2rem;
     cursor: pointer;
     border-bottom: 0.4rem solid transparent;
+    transition: all .2s;
 
     @media (hover: hover) {
       &:hover {
         border-bottom: 0.4rem solid rgb(204, 203, 188);
+        transform: translateY(-.3rem);
       }
     }
   }
