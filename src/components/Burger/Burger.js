@@ -1,8 +1,9 @@
 import React from 'react';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 import styles from './Burger.module.scss';
+import PropTypes from 'prop-types';
 
-const burger = (props) => {
+const Burger = (props) => {
 
   const ingreds = Object.keys(props.ingredients).flatMap(key => {
     return Array.from({ length: props.ingredients[key] }, () => key);
@@ -19,4 +20,8 @@ const burger = (props) => {
   );
 }
 
-export default burger;
+Burger.propTypes = {
+  ingredients: PropTypes.object
+}
+
+export default Burger;

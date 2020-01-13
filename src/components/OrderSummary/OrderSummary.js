@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './OrderSummary.module.scss';
 import Button from '../UI/Button/Button';
+import PropTypes from 'prop-types';
 
 const OrderSummary = (props) => {
   const finalOrder = Object.keys(props.ingredients).map(ingr => {
@@ -23,6 +24,14 @@ const OrderSummary = (props) => {
       <Button color="red" clicked={props.cancelOrder}>Cancel</Button>
     </div>
   )
+}
+
+OrderSummary.propTypes = {
+  ingredients: PropTypes.object,
+  setVisibility: PropTypes.func,
+  continueOrder: PropTypes.func,
+  cancelOrder: PropTypes.func,
+  price: PropTypes.number,
 }
 
 export default OrderSummary;

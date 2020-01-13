@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './BurgerControls.module.scss';
 import BurgerControl from './BurgerControl/BurgerControl';
+import PropTypes from 'prop-types';
 
 const BurgerControls = (props) => {
   const ingredNames = Object.keys(props.ingredients);
@@ -19,6 +20,15 @@ const BurgerControls = (props) => {
     </div>
   )
 }
+
+BurgerControls.propTypes = {
+  ingredients: PropTypes.object,
+  changeAmount: PropTypes.func,
+  price: PropTypes.number,
+  canPurchase: PropTypes.bool,
+  setVisibility: PropTypes.func  
+}
+
 export default BurgerControls;
 
 //example to follow: https://burger-builder-1efe7.firebaseapp.com/
