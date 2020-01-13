@@ -3,17 +3,24 @@ import styles from './Modal.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 import PropTypes from 'prop-types';
 
-const Modal = (props) => {
+class Modal extends React.Component {
+
+shouldComponentUpdate(nextProps, nextState) {
+  return nextProps.isOpen !== this.props.isOpen;
+}
+
+render() {
   return (
     <React.Fragment>
-      <Backdrop show={props.isOpen} />
+      <Backdrop show={this.props.isOpen} />
       <div className={styles.Modal} style={
-        { transform: props.isOpen ? 'translate(-50%, -50%)' : 'translate(-50%, -1000px)' }
+        { transform: this.props.isOpen ? 'translate(-50%, -50%)' : 'translate(-50%, -1000px)' }
       }>
-        {props.children}
+        {this.props.children}
       </div>
     </React.Fragment>
   )
+}
 }
 
 Modal.propTypes = {

@@ -3,27 +3,36 @@ import styles from './OrderSummary.module.scss';
 import Button from '../UI/Button/Button';
 import PropTypes from 'prop-types';
 
-const OrderSummary = (props) => {
-  const finalOrder = Object.keys(props.ingredients).map(ingr => {
+class OrderSummary extends React.Component {
+
+componentDidUpdate(prevProps, prevState, snapShot) {
+  //this gets invoked twice even if the modal is not displayed. (twice because the calledback passed as a prop sets the state twice (second time based on the outcome of the 1st setState call)) this is why 
+  console.log('[OrderSummary] didUpdate');
+}
+
+  render() {
+    const finalOrder = Object.keys(this.props.ingredients).map(ingr => {
+      return (
+        <li key={ingr}>
+          <span>{ingr}: </span>{this.props.ingredients[ingr]}
+        </li>
+      );
+    })
+
     return (
-      <li key={ingr}>
-        <span>{ingr}: </span>{props.ingredients[ingr]}
-      </li>
-    );
-  })
-  return (
-    <div className={styles.OrderSummary}>
-      <p className={styles.closeIcon} onClick={props.setVisibility}>&times;</p>
-      <h3 className={styles.header}>Your final order</h3>
-      <p> A tasty burger with the following ingredients is coming up:</p>
-      <ul className={styles.ingredients}>
-        {finalOrder}
-      </ul>
-      <p>The price is<span style={{ fontSize: '1.2em' }}> {props.price.toFixed(2)} USD </span></p>
-      <Button color="green" clicked={props.continueOrder}>Continue</Button>
-      <Button color="red" clicked={props.cancelOrder}>Cancel</Button>
-    </div>
-  )
+      <div className={styles.OrderSummary}>
+        <p className={styles.closeIcon} onClick={this.props.setVisibility}>&times;</p>
+        <h3 className={styles.header}>Your final order</h3>
+        <p> A tasty burger with the following ingredients is coming up:</p>
+        <ul className={styles.ingredients}>
+          {finalOrder}
+        </ul>
+        <p>The price is<span style={{ fontSize: '1.2em' }}> {this.props.price.toFixed(2)} USD </span></p>
+        <Button color="green" clicked={this.props.continueOrder}>Continue</Button>
+        <Button color="red" clicked={this.props.cancelOrder}>Cancel</Button>
+      </div>
+    )
+  }
 }
 
 OrderSummary.propTypes = {
