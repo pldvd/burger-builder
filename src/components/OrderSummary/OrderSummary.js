@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 class OrderSummary extends React.Component {
 
 componentDidUpdate(prevProps, prevState, snapShot) {
-  //this gets invoked twice even if the modal is not displayed. (twice because the calledback passed as a prop sets the state twice (second time based on the outcome of the 1st setState call)) this is why 
+  //this used to get invoked twice even if the modal was not displayed. (twice because the calledback passed as a prop sets the state twice (second time based on the outcome of the 1st setState call)) this is why shouldComponentUpdate was implemented in the Modal component which contains this one
   console.log('[OrderSummary] didUpdate');
 }
 
