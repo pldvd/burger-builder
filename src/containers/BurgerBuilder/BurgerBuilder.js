@@ -3,6 +3,7 @@ import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/BurgerControls/BurgerControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
+import axios from '../../axios';
 
 class BurgerBuilder extends Component {
 
@@ -69,7 +70,23 @@ class BurgerBuilder extends Component {
   }
 
   continueOrder = () => {
-    alert('you clicked continue')
+    // alert('you clicked continue')
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.finalPrice,
+      customer: {
+        name: 'Peter Pan',
+        address: {
+          street: 'Wendy str. 23',
+          city: 'Fairy',
+          country: 'Neverland'
+        }
+      }
+    }
+
+    axios.post('/orders.json', order)
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
   }
 
   cancelOrder = () => {
