@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 class Modal extends React.Component {
 
 shouldComponentUpdate(nextProps, nextState) {
-  return nextProps.isOpen !== this.props.isOpen;
+  return nextProps.isOpen !== this.props.isOpen || nextProps.isLoading !== this.props.isLoading;
 }
 
 render() {

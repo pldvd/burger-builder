@@ -20,6 +20,7 @@ class BurgerBuilder extends Component {
       finalPrice: 4,
       isPurchasable: false,
       modalIsOpen: false,
+      isLoading: false
     }
 
     this.IngredientPriceList = {
@@ -70,7 +71,11 @@ class BurgerBuilder extends Component {
   }
 
   continueOrder = () => {
-    // alert('you clicked continue')
+
+    this.setState({
+      isLoading: true
+    }, console.log('isLoading set true'))
+
     const order = {
       ingredients: this.state.ingredients,
       price: this.state.finalPrice,
@@ -85,8 +90,20 @@ class BurgerBuilder extends Component {
     }
 
     axios.post('/orders.json', order)
-    .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .then(response => {
+      console.log(response);
+      this.setState({
+        isLoading: false,
+        modalIsOpen:false,
+      });
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({
+        isLoading: false,
+        modalIsOpen:false,
+      })
+    });
   }
 
   cancelOrder = () => {
@@ -106,12 +123,13 @@ class BurgerBuilder extends Component {
   render() {
     return (
       <Fragment>
-        <Modal isOpen={this.state.modalIsOpen}>
+        <Modal isOpen={this.state.modalIsOpen} isLoading={this.state.isLoading}>
           <OrderSummary ingredients={this.state.ingredients}
             setVisibility={this.setModalVisibility}
             continueOrder={this.continueOrder}
             cancelOrder={this.cancelOrder}
             price={this.state.finalPrice}
+            loading={this.state.isLoading}
           />
         </Modal>
         <Burger ingredients={this.state.ingredients} />

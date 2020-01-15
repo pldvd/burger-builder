@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './OrderSummary.module.scss';
 import Button from '../UI/Button/Button';
 import PropTypes from 'prop-types';
+import Loader from '../UI/Loader/Loader';
 
 class OrderSummary extends React.Component {
 
@@ -19,7 +20,7 @@ componentDidUpdate(prevProps, prevState, snapShot) {
       );
     })
 
-    return (
+    const fullOrderSummary = (
       <div className={styles.OrderSummary}>
         <p className={styles.closeIcon} onClick={this.props.setVisibility}>&times;</p>
         <h3 className={styles.header}>Your final order</h3>
@@ -31,7 +32,9 @@ componentDidUpdate(prevProps, prevState, snapShot) {
         <Button color="green" clicked={this.props.continueOrder}>Continue</Button>
         <Button color="red" clicked={this.props.cancelOrder}>Cancel</Button>
       </div>
-    )
+    );
+
+    return this.props.loading ? <Loader /> : fullOrderSummary;
   }
 }
 
