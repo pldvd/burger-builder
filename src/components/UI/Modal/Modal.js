@@ -12,7 +12,7 @@ shouldComponentUpdate(nextProps, nextState) {
 render() {
   return (
     <React.Fragment>
-      <Backdrop show={this.props.isOpen} />
+      <Backdrop show={this.props.isOpen} setVisibility={this.props.setVisibility}/>
       <div className={styles.Modal} style={
         { transform: this.props.isOpen ? 'translate(-50%, -50%)' : 'translate(-50%, -1000px)' }
       }>

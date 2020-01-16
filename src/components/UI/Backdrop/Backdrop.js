@@ -3,7 +3,7 @@ import styles from './Backdrop.module.scss';
 import PropTypes from 'prop-types';
 
 const Backdrop = (props) => {
-  return props.show ? <div className={styles.Backdrop}>{props.children}</div> : null;
+  return props.show ? <div className={styles.Backdrop} onClick={props.setVisibility}>{props.children}</div> : null;
 }
 
 Backdrop.protoTypes = {

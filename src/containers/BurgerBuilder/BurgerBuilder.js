@@ -123,7 +123,7 @@ class BurgerBuilder extends Component {
   render() {
     return (
       <Fragment>
-        <Modal isOpen={this.state.modalIsOpen} isLoading={this.state.isLoading}>
+        <Modal isOpen={this.state.modalIsOpen} isLoading={this.state.isLoading} setVisibility={this.setModalVisibility}>
           <OrderSummary ingredients={this.state.ingredients}
             setVisibility={this.setModalVisibility}
             continueOrder={this.continueOrder}
