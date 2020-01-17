@@ -31,7 +31,7 @@ class BurgerBuilder extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.jsonnn')
+    axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.json')
       .then(response => {
         this.setState({ ingredients: response.data })
       })
@@ -83,7 +83,7 @@ class BurgerBuilder extends Component {
 
     this.setState({
       isLoading: true
-    }, console.log('isLoading set true'))
+    })
 
     const order = {
       ingredients: this.state.ingredients,
