@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from './BurgerControl.module.scss';
-import PropTypes from 'prop-types';
 
-const BurgerControl = (props) => {
+interface BurgerControlProps {
+  name: string,
+  amount: number,
+  changeAmount: (lessOrMore: string, ingredient: string) => void,
+}
+
+const BurgerControl: React.FC<BurgerControlProps> = (props) => {
 
   return (
     <div className={styles.BurgerControl}>
@@ -12,12 +17,6 @@ const BurgerControl = (props) => {
       <button className={`${styles.btn} ${styles['btn--more']}`} onClick={() =>  props.changeAmount('more', props.name)}>More</button>
     </div>
   );
-}
-
-BurgerControl.propType = {
-  name: PropTypes.string,
-  amount: PropTypes.number,
-  changeAmount: PropTypes.func,
 }
 
 export default BurgerControl;
