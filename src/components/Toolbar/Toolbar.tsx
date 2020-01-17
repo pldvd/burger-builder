@@ -4,7 +4,11 @@ import Navigation from './Navigation/Navigation';
 import HamburgerIcon from '../UI/HamburgerIcon/HamburgerIcon';
 import logoImage from '../../../src/burger-logo.png';
 
-const Toolbar = (props) => {
+interface ToolBarProps {
+sideControl: () => void
+}
+
+const Toolbar: React.FC<ToolBarProps> = (props) => {
   return (
     <header className={styles.Toolbar}>
       <img src={logoImage} alt={'Burger logo'} />
