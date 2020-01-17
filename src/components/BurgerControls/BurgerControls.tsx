@@ -1,9 +1,22 @@
 import React from 'react';
 import styles from './BurgerControls.module.scss';
 import BurgerControl from './BurgerControl/BurgerControl';
-import PropTypes from 'prop-types';
 
-const BurgerControls = (props) => {
+interface BurgerControlProps {
+  ingredients: {
+    salad: number,
+    cheese: number,
+    bacon: number,
+    meat: number,
+    [index: string] : number
+  },
+  changeAmount: () =>  void,
+  price: number,
+  canPurchase: boolean,
+  setVisibility: () => void,
+}
+
+const BurgerControls: React.FC<BurgerControlProps>= (props) => {
   const ingredNames = Object.keys(props.ingredients);
 
   return (
@@ -19,14 +32,6 @@ const BurgerControls = (props) => {
       <button className={styles.btn} onClick={props.setVisibility} disabled={!props.canPurchase}>order now</button>
     </div>
   )
-}
-
-BurgerControls.propTypes = {
-  ingredients: PropTypes.object,
-  changeAmount: PropTypes.func,
-  price: PropTypes.number,
-  canPurchase: PropTypes.bool,
-  setVisibility: PropTypes.func  
 }
 
 export default BurgerControls;
