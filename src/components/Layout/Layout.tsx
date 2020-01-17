@@ -4,7 +4,7 @@ import styles from './Layout.module.css';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import Backdrop from '../UI/Backdrop/Backdrop';
 
-const Layout = (props) => {
+const Layout: React.FC = (props) => {
 
   const [sideIsOpen, toggleSideOpen] = useState(false);
 
