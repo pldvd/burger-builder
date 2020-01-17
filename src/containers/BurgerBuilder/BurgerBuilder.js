@@ -3,6 +3,7 @@ import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/BurgerControls/BurgerControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
+import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 
 class BurgerBuilder extends Component {
@@ -89,7 +90,7 @@ class BurgerBuilder extends Component {
       }
     }
 
-    axios.post('/orders.json', order)
+    axios.post('/orders.jsonnnnn', order)
     .then(response => {
       console.log(response);
       this.setState({
@@ -144,4 +145,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+export default WithErrorHandler(BurgerBuilder, axios);
