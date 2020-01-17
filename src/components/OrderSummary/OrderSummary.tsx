@@ -1,15 +1,24 @@
 import React from 'react';
 import styles from './OrderSummary.module.scss';
 import Button from '../UI/Button/Button';
-import PropTypes from 'prop-types';
 import Loader from '../UI/Loader/Loader';
 
-class OrderSummary extends React.Component {
+interface OrderSummaryProps {
+  ingredients:{
+    salad: number,
+    cheese: number,
+    bacon: number,
+    meat: number,
+    [index: string] : number
+  },
+  setVisibility: () => void,
+  continueOrder: () => void,
+  cancelOrder: () => void,
+  price: number,
+  loading: boolean
+};
 
-componentDidUpdate(prevProps, prevState, snapShot) {
-  //this used to get invoked twice even if the modal was not displayed. (twice because the calledback passed as a prop sets the state twice (second time based on the outcome of the 1st setState call)) this is why shouldComponentUpdate was implemented in the Modal component which contains this one
-  console.log('[OrderSummary] didUpdate');
-}
+class OrderSummary extends React.Component<OrderSummaryProps> {
 
   render() {
     const finalOrder = Object.keys(this.props.ingredients).map(ingr => {
@@ -36,14 +45,6 @@ componentDidUpdate(prevProps, prevState, snapShot) {
 
     return this.props.loading ? <Loader /> : fullOrderSummary;
   }
-}
-
-OrderSummary.propTypes = {
-  ingredients: PropTypes.object,
-  setVisibility: PropTypes.func,
-  continueOrder: PropTypes.func,
-  cancelOrder: PropTypes.func,
-  price: PropTypes.number,
 }
 
 export default OrderSummary;

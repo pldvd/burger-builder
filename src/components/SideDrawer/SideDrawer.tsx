@@ -2,7 +2,12 @@ import React from 'react';
 import styles from './SideDrawer.module.scss';
 import Navigation from '../Toolbar/Navigation/Navigation';
 
-const SideDrawer = (props) => {
+interface SideDrawerProps {
+  isOpen: boolean,
+  sideControl: () => void
+}
+
+const SideDrawer: React.FC<SideDrawerProps> = (props) => {
 
   return (
     <div className={styles.SideDrawer} style={{
