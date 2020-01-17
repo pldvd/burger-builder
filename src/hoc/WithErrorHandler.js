@@ -17,6 +17,17 @@ const WithErrorHandler = (WrappedComponent, axios) => {
       this.setState({ error: null });
     }
 
+    errorMsgStyle = {
+      padding: "1.5em",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+
+      fontSize: "2.5rem",
+      backgroundColor: "white",
+      color: "red"
+    }
+
     componentDidMount() {
 
       axios.interceptors.request.use(request => {
@@ -34,7 +45,7 @@ const WithErrorHandler = (WrappedComponent, axios) => {
       return (
         <Fragment>
           <Modal isOpen={this.state.error} setVisibility={this.setVisibility}>
-            {this.state.error ? this.state.error.message : null}
+            <div style={this.errorMsgStyle}>{this.state.error ? `An error occured: ${this.state.error.message}` : null}</div>
           </Modal>
           <WrappedComponent {...this.props} />
         </Fragment>
