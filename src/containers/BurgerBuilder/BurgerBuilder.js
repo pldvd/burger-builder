@@ -17,7 +17,9 @@ class BurgerBuilder extends Component {
       finalPrice: 4,
       isPurchasable: false,
       modalIsOpen: false,
-      isLoading: false
+      isLoading: false,
+      hasError: false,
+      httpErrorMsg: null
     }
 
     this.IngredientPriceList = {
@@ -29,9 +31,12 @@ class BurgerBuilder extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.json')
+    axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.jsonnn')
       .then(response => {
         this.setState({ ingredients: response.data })
+      })
+      .catch(err => {
+        this.setState({ hasError: true, httpErrorMsg: this.props.httpError });
       })
   }
 
@@ -125,8 +130,8 @@ class BurgerBuilder extends Component {
   }
 
   render() {
+    let burger = this.state.hasError ? <p>{`${this.state.httpErrorMsg}`}</p> : <Loader />;
 
-    let burger = <Loader />;
     if (this.state.ingredients) {
       burger = (
         <Fragment>

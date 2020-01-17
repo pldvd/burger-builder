@@ -11,6 +11,16 @@ const WithErrorHandler = (WrappedComponent, axios) => {
         error: null
       };
       this.setVisibility = this.setVisibility.bind(this);
+
+      axios.interceptors.request.use(request => {
+        this.setState({ error: null });
+        return request;
+      })
+
+
+      axios.interceptors.response.use(response => response, error => {
+        this.setState({ error: error });
+      })
     }
 
     setVisibility() {
@@ -28,18 +38,18 @@ const WithErrorHandler = (WrappedComponent, axios) => {
       color: "red"
     }
 
-    componentDidMount() {
+    // componentDidMount() {
 
-      axios.interceptors.request.use(request => {
-        this.setState({ error: null });
-        return request;
-      })
+    //   axios.interceptors.request.use(request => {
+    //     this.setState({ error: null });
+    //     return request;
+    //   })
 
 
-      axios.interceptors.response.use(response => response, error => {
-        this.setState({ error: error });
-      })
-    }
+    //   axios.interceptors.response.use(response => response, error => {
+    //     this.setState({ error: error });
+    //   })
+    // }
 
     render() {
       return (
@@ -47,7 +57,7 @@ const WithErrorHandler = (WrappedComponent, axios) => {
           <Modal isOpen={this.state.error} setVisibility={this.setVisibility}>
             <div style={this.errorMsgStyle}>{this.state.error ? `An error occured: ${this.state.error.message}` : null}</div>
           </Modal>
-          <WrappedComponent {...this.props} />
+          <WrappedComponent httpError ={this.state.error} {...this.props} />
         </Fragment>
       )
     }
