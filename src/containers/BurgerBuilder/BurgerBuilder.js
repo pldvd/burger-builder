@@ -5,6 +5,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
+import Loader from '../../components/UI/Loader/Loader';
 
 class BurgerBuilder extends Component {
 
@@ -12,12 +13,7 @@ class BurgerBuilder extends Component {
     super(props);
 
     this.state = {
-      ingredients: {
-        salad: 0,
-        cheese: 0,
-        bacon: 0,
-        meat: 0,
-      },
+      ingredients: null,
       finalPrice: 4,
       isPurchasable: false,
       modalIsOpen: false,
@@ -30,6 +26,13 @@ class BurgerBuilder extends Component {
       bacon: 1,
       meat: 2,
     }
+  }
+
+  componentDidMount() {
+    axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.json')
+      .then(response => {
+        this.setState({ ingredients: response.data })
+      })
   }
 
   changeAmount = (lessOrMore, ingredient) => {
@@ -90,21 +93,21 @@ class BurgerBuilder extends Component {
       }
     }
 
-    axios.post('/orders.jsonnnnn', order)
-    .then(response => {
-      console.log(response);
-      this.setState({
-        isLoading: false,
-        modalIsOpen:false,
-      });
-    })
-    .catch(error => {
-      console.log(error);
-      this.setState({
-        isLoading: false,
-        modalIsOpen:false,
+    axios.post('/orders.json', order)
+      .then(response => {
+        console.log(response);
+        this.setState({
+          isLoading: false,
+          modalIsOpen: false,
+        });
       })
-    });
+      .catch(error => {
+        console.log(error);
+        this.setState({
+          isLoading: false,
+          modalIsOpen: false,
+        })
+      });
   }
 
   cancelOrder = () => {
@@ -122,10 +125,26 @@ class BurgerBuilder extends Component {
   }
 
   render() {
+
+    let burger = <Loader />;
+    if (this.state.ingredients) {
+      burger = (
+        <Fragment>
+          <Burger ingredients={this.state.ingredients} />
+          <BurgerControls
+            ingredients={this.state.ingredients}
+            changeAmount={this.changeAmount}
+            price={this.state.finalPrice}
+            canPurchase={this.state.isPurchasable}
+            setVisibility={this.setModalVisibility} />
+        </Fragment>
+      )
+    }
+
     return (
       <Fragment>
         <Modal isOpen={this.state.modalIsOpen} isLoading={this.state.isLoading} setVisibility={this.setModalVisibility}>
-          <OrderSummary ingredients={this.state.ingredients}
+          <OrderSummary ingredients={this.state.ingredients || {}}
             setVisibility={this.setModalVisibility}
             continueOrder={this.continueOrder}
             cancelOrder={this.cancelOrder}
@@ -133,13 +152,7 @@ class BurgerBuilder extends Component {
             loading={this.state.isLoading}
           />
         </Modal>
-        <Burger ingredients={this.state.ingredients} />
-        <BurgerControls
-          ingredients={this.state.ingredients}
-          changeAmount={this.changeAmount}
-          price={this.state.finalPrice}
-          canPurchase={this.state.isPurchasable}
-          setVisibility={this.setModalVisibility} />
+        {burger}
       </Fragment>
     )
   }
