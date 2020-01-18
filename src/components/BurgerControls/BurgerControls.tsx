@@ -10,7 +10,7 @@ interface BurgerControlProps {
     meat: number,
     [index: string] : number
   },
-  changeAmount: () =>  void,
+  changeAmount: (lessOrMore: string, ingredient: string) =>  void,
   price: number,
   canPurchase: boolean,
   setVisibility: () => void,

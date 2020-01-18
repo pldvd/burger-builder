@@ -7,9 +7,33 @@ import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 
-class BurgerBuilder extends Component {
 
-  constructor(props) {
+
+interface BurgerBuilderState {
+  ingredients: any,
+  finalPrice: number,
+  isPurchasable: boolean,
+  modalIsOpen: boolean,
+  isLoading: boolean,
+  hasError: boolean,
+  httpErrorMsg: any
+}
+
+interface BurgerBuilderProps {
+  httpError: {}
+}
+
+interface IngredientPriceListInterface {
+  salad: number,
+  cheese: number,
+  bacon: number,
+  meat: number,
+  [key: string]: number
+}
+
+class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
+
+  constructor(props: BurgerBuilderProps) {
     super(props);
 
     this.state = {
@@ -21,13 +45,13 @@ class BurgerBuilder extends Component {
       hasError: false,
       httpErrorMsg: null
     }
+  }
 
-    this.IngredientPriceList = {
-      salad: .5,
-      cheese: 1,
-      bacon: 1,
-      meat: 2,
-    }
+  IngredientPriceList: IngredientPriceListInterface = {
+    salad: .5,
+    cheese: 1,
+    bacon: 1,
+    meat: 2,
   }
 
   componentDidMount() {
@@ -40,7 +64,7 @@ class BurgerBuilder extends Component {
       })
   }
 
-  changeAmount = (lessOrMore, ingredient) => {
+  changeAmount = (lessOrMore: string, ingredient: string) => {
     if (lessOrMore === 'less') {
       this.setState(prevState => {
         return {
@@ -67,7 +91,7 @@ class BurgerBuilder extends Component {
   }
 
   //This will be added as a second parameter/callback to setState - this makes sure it runs once the state shows latest ingredients object
-  checkIfPurchasable = (ingredients) => {
+  checkIfPurchasable = (ingredients: { [key: string]: number }) => {
     const canPurchase = Object.values(ingredients).reduce((sum, currentVal) => sum + currentVal) > 0;
 
     this.setState({ isPurchasable: canPurchase });
