@@ -1,11 +1,17 @@
 import React from 'react';
 import styles from './Modal.module.css';
 import Backdrop from '../Backdrop/Backdrop';
-import PropTypes from 'prop-types';
 
-class Modal extends React.Component {
+interface ModalProps {
+  isOpen: boolean,
+  isLoading: boolean,
+  setVisibility: () => void,
+  
+}
 
-shouldComponentUpdate(nextProps, nextState) {
+class Modal extends React.Component<ModalProps> {
+
+shouldComponentUpdate(nextProps: ModalProps, nextState: {}) {
   return nextProps.isOpen !== this.props.isOpen || nextProps.isLoading !== this.props.isLoading;
 }
 
@@ -21,10 +27,6 @@ render() {
     </React.Fragment>
   )
 }
-}
-
-Modal.propTypes = {
-  isOpen: PropTypes.bool
 }
 
 export default Modal;
