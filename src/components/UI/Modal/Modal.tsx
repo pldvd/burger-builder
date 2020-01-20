@@ -4,7 +4,7 @@ import Backdrop from '../Backdrop/Backdrop';
 
 interface ModalProps {
   isOpen: boolean,
-  isLoading: boolean,
+  isLoading?: boolean,
   setVisibility: () => void,
   
 }

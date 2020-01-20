@@ -1,27 +1,32 @@
 import React, { Component, Fragment } from 'react';
 import Modal from '../components/UI/Modal/Modal';
+import { AxiosInstance } from 'axios';
 
-const WithErrorHandler = (WrappedComponent, axios) => {
+interface stateWithError {
+  error: null | { message: string }
+}
 
-  return class extends Component {
+const WithErrorHandler = (WrappedComponent: typeof React.Component, axios: AxiosInstance) => {
 
-    constructor(props) {
+  return class extends Component<{}, stateWithError> {
+
+    constructor(props: {}) {
       super(props);
       this.state = {
         error: null
       };
       this.setVisibility = this.setVisibility.bind(this);
-
-      this.reqInterceptor = axios.interceptors.request.use(request => {
-        this.setState({ error: null });
-        return request;
-      })
-
-
-      this.resInterceptor = axios.interceptors.response.use(response => response, error => {
-        this.setState({ error: error });
-      })
     }
+
+    reqInterceptor = axios.interceptors.request.use(request => {
+      this.setState({ error: null });
+      return request;
+    })
+
+
+    resInterceptor = axios.interceptors.response.use(response => response, error => {
+      this.setState({ error: error });
+    })
 
     componentWillUnmount() {
       axios.interceptors.request.eject(this.reqInterceptor);
@@ -60,10 +65,10 @@ const WithErrorHandler = (WrappedComponent, axios) => {
     render() {
       return (
         <Fragment>
-          <Modal isOpen={this.state.error} setVisibility={this.setVisibility}>
+          <Modal isOpen={Boolean(this.state.error)} setVisibility={this.setVisibility}>
             <div style={this.errorMsgStyle}>{this.state.error ? `An error occured: ${this.state.error.message}` : null}</div>
           </Modal>
-          <WrappedComponent httpError ={this.state.error} {...this.props} />
+          <WrappedComponent httpError={this.state.error} {...this.props} />
         </Fragment>
       )
     }
