@@ -8,6 +8,8 @@ interface CheckoutSummaryProps extends BurgerProps {
   cancel: () => void,
 }
 
+
+
 const CheckoutSummary: React.FC<CheckoutSummaryProps> = (props) => {
   return (
     <div className={styles.CheckoutSummary}>

@@ -2,18 +2,19 @@ import React from 'react';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 import styles from './Burger.module.scss';
 
-
-export interface BurgerProps {
-  ingredients: {
-    salad: number,
-    cheese: number,
-    bacon: number,
-    meat: number,
-    [index: string] : number
-  }
+export type ingredientType = {
+  salad: number,
+  cheese: number,
+  bacon: number,
+  meat: number,
+  [index: string] : number
 }
 
-const Burger: React.FC<BurgerProps> = (props) => {
+export interface BurgerProps {
+  ingredients: ingredientType
+}
+
+const Burger: React.FC<BurgerProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
 
   const ingreds = Object.keys(props.ingredients).flatMap(key => {
     return Array.from({ length: props.ingredients[key] }, () => key);

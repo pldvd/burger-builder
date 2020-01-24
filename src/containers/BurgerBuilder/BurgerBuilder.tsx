@@ -7,6 +7,8 @@ import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 
+import { RouteComponentProps } from 'react-router-dom';
+
 
 
 interface BurgerBuilderState {
@@ -19,7 +21,7 @@ interface BurgerBuilderState {
   httpErrorMsg: any
 }
 
-interface BurgerBuilderProps {
+interface BurgerBuilderProps extends RouteComponentProps {
   httpError: {}
 }
 
@@ -104,39 +106,47 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 
   continueOrder = () => {
+    let query: string[] = [];
 
-    this.setState({
-      isLoading: true
+    Object.keys(this.state.ingredients).forEach(key => {
+      query.push(key + '=' + this.state.ingredients[key]);
     })
 
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.finalPrice,
-      customer: {
-        name: 'Peter Pan',
-        address: {
-          street: 'Wendy str. 23',
-          city: 'Fairy',
-          country: 'Neverland'
-        }
-      }
-    }
+    this.props.history.push('/checkout?' + query.join('&'));
 
-    axios.post('/orders.json', order)
-      .then(response => {
-        console.log(response);
-        this.setState({
-          isLoading: false,
-          modalIsOpen: false,
-        });
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({
-          isLoading: false,
-          modalIsOpen: false,
-        })
-      });
+    
+    // this.setState({
+    //   isLoading: true
+    // })
+
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.finalPrice,
+    //   customer: {
+    //     name: 'Peter Pan',
+    //     address: {
+    //       street: 'Wendy str. 23',
+    //       city: 'Fairy',
+    //       country: 'Neverland'
+    //     }
+    //   }
+    // }
+
+    // axios.post('/orders.json', order)
+    //   .then(response => {
+    //     console.log(response);
+    //     this.setState({
+    //       isLoading: false,
+    //       modalIsOpen: false,
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     this.setState({
+    //       isLoading: false,
+    //       modalIsOpen: false,
+    //     })
+    //   });
   }
 
   cancelOrder = () => {
