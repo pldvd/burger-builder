@@ -3,7 +3,7 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 import styles from './Burger.module.scss';
 
 
-interface BurgerProps {
+export interface BurgerProps {
   ingredients: {
     salad: number,
     cheese: number,

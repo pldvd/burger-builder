@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Button.module.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
   color: string,
   clicked: () => void
 }

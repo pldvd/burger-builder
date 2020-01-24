@@ -65,7 +65,7 @@ const WithErrorHandler = (WrappedComponent: typeof React.Component, axios: Axios
     render() {
       return (
         <Fragment>
-          <Modal isOpen={Boolean(this.state.error)} setVisibility={this.setVisibility}>
+          <Modal isOpen={!!this.state.error} setVisibility={this.setVisibility}>
             <div style={this.errorMsgStyle}>{this.state.error ? `An error occured: ${this.state.error.message}` : null}</div>
           </Modal>
           <WrappedComponent httpError={this.state.error} {...this.props} />
