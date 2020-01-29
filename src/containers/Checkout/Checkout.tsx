@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Route} from 'react-router-dom';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import CheckoutForm from './CheckoutForm/CheckoutForm';
 import { RouteComponentProps } from 'react-router-dom';
 import { ingredientType } from '../../components/Burger/Burger';
 
@@ -26,6 +28,7 @@ class Checkout extends Component<RouteComponentProps> {
     return (
       <div>
         <CheckoutSummary ingredients={myIngreds} cancel={this.cancelOrder} continue={this.continueOrder} />
+        <Route path={this.props.match.url + '/checkout-form'} component={CheckoutForm}/>
       </div>
     )
   }
