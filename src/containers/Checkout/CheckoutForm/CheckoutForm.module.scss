@@ -1,0 +1,21 @@
+.CheckoutForm {
+  width: 80%;
+  margin: 1rem auto;
+
+  & h2 {
+    text-align: center;
+  }
+
+  & form {
+    max-width: 400px;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    & input {
+      width: 100%;
+      margin: .5rem 0;
+      padding: 1rem;
+    }
+  }
+}

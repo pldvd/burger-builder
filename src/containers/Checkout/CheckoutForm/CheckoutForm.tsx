@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button';
+import styles from './CheckoutForm.module.scss';
 
 interface CheckoutFormInterface {
   name: string,
@@ -24,8 +25,8 @@ class CheckoutForm extends Component<{}, CheckoutFormInterface> {
 
   render() {
     return (
-      <Fragment>
-        <h4>Enter your contact details please</h4>
+      <div className={styles.CheckoutForm}>
+        <h2>Enter your contact details please</h2>
         <form>
           <input type="text" name="name" placeholder="Enter your name."/>
           <input type="email" name="email" placeholder="Enter your email."/>
@@ -33,7 +34,7 @@ class CheckoutForm extends Component<{}, CheckoutFormInterface> {
           <input type="text" name="postal" placeholder="Enter your postal code."/>
           <Button color="green" clicked={() => console.log('hello')}>Send</Button>
         </form>
-      </Fragment>
+      </div>
     )
   }
 
