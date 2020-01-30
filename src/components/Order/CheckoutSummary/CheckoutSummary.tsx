@@ -13,7 +13,7 @@ interface CheckoutSummaryProps extends BurgerProps {
 const CheckoutSummary: React.FC<CheckoutSummaryProps> = (props) => {
   return (
     <div className={styles.CheckoutSummary}>
-      <h1 style={{textAlign: "center"}}>We hope you will like your burger!</h1>
+      <h1 style={{ textAlign: "center" }}>We hope you will like your burger!</h1>
       <div className={styles.Burger}>
         <Burger ingredients={props.ingredients} />
       </div>

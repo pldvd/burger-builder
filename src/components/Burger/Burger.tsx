@@ -2,16 +2,16 @@ import React from 'react';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 import styles from './Burger.module.scss';
 
-export type ingredientType = {
-  salad: number,
-  cheese: number,
-  bacon: number,
-  meat: number,
-  [index: string] : number
+export type IngredientType = {
+  salad: number;
+  cheese: number;
+  bacon: number;
+  meat: number;
+  [index: string] : number;
 }
 
 export interface BurgerProps {
-  ingredients: ingredientType
+  ingredients: IngredientType
 }
 
 const Burger: React.FC<BurgerProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
