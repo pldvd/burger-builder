@@ -3,7 +3,7 @@ import style from './Button.module.scss';
 
 export interface ButtonProps {
   color: string,
-  clicked: () => void
+  clicked: (e: React.FormEvent) => void
 }
 
 const Button: React.FC<ButtonProps> = (props) => {

@@ -5,10 +5,11 @@ import CheckoutForm from './CheckoutForm/CheckoutForm';
 import { RouteComponentProps } from 'react-router-dom';
 import { IngredientType } from '../../components/Burger/Burger';
 
-class Checkout extends Component<RouteComponentProps, { ingredients: IngredientType }> {
+class Checkout extends Component<RouteComponentProps, { ingredients: IngredientType, finalPrice: number | null }> {
 
   state = {
     ingredients: {} as IngredientType,
+    finalPrice: null,
   };
 
   continueOrder = () => {
@@ -39,7 +40,9 @@ class Checkout extends Component<RouteComponentProps, { ingredients: IngredientT
       meat: Number(rawQuery.get('meat'))
     }
 
-    this.setState({ ingredients: { ...myIngreds } });
+    const finalPrice: number = Number(rawQuery.get('price'))
+
+    this.setState({ ingredients: { ...myIngreds }, finalPrice: finalPrice });
   }
 
   render() {
@@ -47,7 +50,7 @@ class Checkout extends Component<RouteComponentProps, { ingredients: IngredientT
     return (
       <div>
         <CheckoutSummary ingredients={this.state.ingredients} cancel={this.cancelOrder} continue={this.continueOrder} />
-        <Route path={this.props.match.url + '/checkout-form'} component={CheckoutForm} />
+        <Route path={this.props.match.url + '/checkout-form'} render={(props) => <CheckoutForm ingredients={this.state.ingredients} finalPrice={this.state.finalPrice} />} />
       </div>
     )
   }

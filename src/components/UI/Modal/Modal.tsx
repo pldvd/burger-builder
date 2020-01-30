@@ -9,7 +9,7 @@ interface ModalProps {
   
 }
 
-class Modal extends React.Component<ModalProps> {
+class Modal extends React.Component<ModalProps, {}> {
 
 shouldComponentUpdate(nextProps: ModalProps, nextState: {}) {
   return nextProps.isOpen !== this.props.isOpen || nextProps.isLoading !== this.props.isLoading;

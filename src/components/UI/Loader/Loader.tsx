@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Loader.module.scss';
 
-const Loader = () => (
+const Loader:React.FC = () => (
     <div className={styles.Loader}>Loading...</div>
 );
 
