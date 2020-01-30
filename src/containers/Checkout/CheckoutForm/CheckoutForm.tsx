@@ -12,15 +12,10 @@ interface CheckoutFormInterface {
 
 }
 
-class CheckoutForm extends Component<{}, CheckoutFormInterface> {
+class CheckoutForm extends Component<{}, {customerData: CheckoutFormInterface}> {
 
   state = {
-    name: '',
-    email: '',
-    address: {
-      street: '',
-      postalCode: '',
-    }
+    customerData: {} as CheckoutFormInterface,
   }
 
   render() {
