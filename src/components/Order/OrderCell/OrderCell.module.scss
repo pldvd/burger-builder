@@ -23,7 +23,7 @@
 .ingredsList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-column-gap: .5rem;
+  gap: .5rem;
   align-items: center;
   margin-bottom: 1rem;
 }

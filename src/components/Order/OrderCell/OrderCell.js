@@ -2,9 +2,8 @@ import React from 'react';
 import style from './OrderCell.module.scss';
 
 const OrderCell = (props) => {
-
   const ingreds = Object.keys(props.ingredients).map(key => (
-    <div className={style.ingred}>
+    <div className={style.ingred} key={key}>
       <span>{key}</span>
       <span>({props.ingredients[key]})</span>
     </div>
