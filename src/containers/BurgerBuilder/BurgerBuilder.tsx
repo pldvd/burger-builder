@@ -9,8 +9,6 @@ import Loader from '../../components/UI/Loader/Loader';
 
 import { RouteComponentProps } from 'react-router-dom';
 
-
-
 interface BurgerBuilderState {
   ingredients: any,
   finalPrice: number,
@@ -18,11 +16,11 @@ interface BurgerBuilderState {
   modalIsOpen: boolean,
   isLoading: boolean,
   hasError: boolean,
-  httpErrorMsg: any
+  httpErrorMsg: null | { message: string }
 }
 
 interface BurgerBuilderProps extends RouteComponentProps {
-  httpError: {}
+  httpError: null | { message: string }
 }
 
 interface IngredientPriceListInterface {
