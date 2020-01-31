@@ -12,7 +12,7 @@
     cursor: pointer;
     border-bottom: 0.4rem solid transparent;
     text-decoration: none;
-    color: #636D61;
+    color: #4a5249;
 
     @media (hover: hover) {
       &:hover {
@@ -24,18 +24,31 @@
   @media screen and (max-width: 31.25em) {
     display: none;
   }
-}
 
-.sideDrawer {
-  text-align: center;
-  padding: 2rem 3rem;
-
-  & > * {
-    padding: 1rem;
-    border-bottom: 0.3rem solid rgb(204, 203, 188);
+  .activeLink {
+    border-bottom: 0.4rem solid rgb(204, 203, 188);
   }
 }
 
-.activeLink {
-  border-bottom: 0.4rem solid rgb(204, 203, 188);
+.sideDrawer {
+  height: 80%;
+  text-align: center;
+  padding: 2rem 3rem;
+  display: grid;
+  grid-template-columns: auto;
+  grid-auto-rows: repeat(2, auto);
+
+  & > * {
+    padding: 1rem;
+    text-decoration: none;
+    color: #4a5249;;
+    align-self: center;
+    justify-self: center;
+    font-size: 3rem;
+  }
+
+  .activeLink {
+    color: #4a5249;
+    text-decoration: underline;
+  }
 }
