@@ -3,7 +3,7 @@ import Modal from '../components/UI/Modal/Modal';
 import { AxiosInstance } from 'axios';
 
 interface stateWithError {
-  error: null | { message: string }
+  error: null | { message: string },
 }
 
 const WithErrorHandler = (WrappedComponent: typeof React.Component, axios: AxiosInstance) => {

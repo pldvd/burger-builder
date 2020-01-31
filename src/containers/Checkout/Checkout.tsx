@@ -20,17 +20,7 @@ class Checkout extends Component<RouteComponentProps, { ingredients: IngredientT
     this.props.history.goBack();
   }
 
-
-  // shouldComponentUpdate(nextProps: RouteComponentProps, nextState: ingredientType): boolean {
-  //   if (nextProps.location.search !== this.props.location.search) {
-  //     return false;
-  //   }
-
-  //   return true;
-  // }
-
   componentDidMount() {
-
     const rawQuery = new URLSearchParams(this.props.location.search);
 
     const myIngreds: IngredientType = {
@@ -46,7 +36,6 @@ class Checkout extends Component<RouteComponentProps, { ingredients: IngredientT
   }
 
   render() {
-
     return (
       <div>
         <CheckoutSummary ingredients={this.state.ingredients} cancel={this.cancelOrder} continue={this.continueOrder} />
