@@ -8,8 +8,8 @@ interface NavigationProps {
 
 const Navigation: React.FC<NavigationProps> = (props) => (
   <ul className={[styles.Navigation, styles[props.type]].join(' ')}>
-    <NavLink to='/hello'>Hello</NavLink>
-    <NavLink to='/orders'>Orders</NavLink>
+    <NavLink to='/hello' activeClassName={styles.activeLink}>Hello</NavLink>
+    <NavLink to='/orders' activeClassName={styles.activeLink}>Orders</NavLink>
   </ul>
 );
 

@@ -11,12 +11,12 @@
     padding: 1rem 2rem 0 2rem;
     cursor: pointer;
     border-bottom: 0.4rem solid transparent;
-    transition: all .2s;
+    text-decoration: none;
+    color: #636D61;
 
     @media (hover: hover) {
       &:hover {
         border-bottom: 0.4rem solid rgb(204, 203, 188);
-        transform: translateY(-.3rem);
       }
     }
   }
@@ -34,4 +34,8 @@
     padding: 1rem;
     border-bottom: 0.3rem solid rgb(204, 203, 188);
   }
+}
+
+.activeLink {
+  border-bottom: 0.4rem solid rgb(204, 203, 188);
 }
