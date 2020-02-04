@@ -2,14 +2,16 @@ import React from 'react';
 import styles from './BurgerControls.module.scss';
 import BurgerControl from './BurgerControl/BurgerControl';
 
-interface BurgerControlProps {
-  ingredients: {
+export interface Ingredients {
     salad: number,
     cheese: number,
     bacon: number,
     meat: number,
     [index: string] : number
-  },
+};
+
+interface BurgerControlProps {
+  ingredients: Ingredients,
   changeAmount: (lessOrMore: string, ingredient: string) =>  void,
   price: number,
   canPurchase: boolean,

@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import OrderCell from '../../components/Order/OrderCell/OrderCell';
 import Axios from '../../axios';
+import { Ingredients } from '../../components/BurgerControls/BurgerControls';
 
-class Orders extends Component {
+export interface OrdersInterface {
+  ingredients: Ingredients,
+  price: number,
+  id: string,
+}
+
+class Orders extends Component<{}, { orders: OrdersInterface[] }> {
 
   state = {
     orders: [],
@@ -10,7 +17,7 @@ class Orders extends Component {
 
   componentDidMount() {
 
-    const orders = [];
+    const orders: OrdersInterface[] = [];
 
     Axios.get('/orders.json')
       .then(response => {
@@ -32,8 +39,9 @@ class Orders extends Component {
   render() {
     const allOrders = this.state.orders.map(order => {
       const { price, id, ingredients } = order;
-      return <OrderCell price={price} ingredients={ingredients} key={id} />
+      return <OrderCell price={price} ingredients={ingredients} id={id} />
     });
+
     return allOrders;
   }
 }
