@@ -16,7 +16,7 @@ interface OrderSummaryProps {
   cancelOrder: () => void,
   price: number,
   loading: boolean
-};
+}
 
 class OrderSummary extends React.Component<OrderSummaryProps> {
 

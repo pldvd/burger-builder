@@ -39,7 +39,7 @@ class Orders extends Component<{}, { orders: OrdersInterface[] }> {
   render() {
     const allOrders = this.state.orders.map(order => {
       const { price, id, ingredients } = order;
-      return <OrderCell price={price} ingredients={ingredients} id={id} />
+      return <OrderCell price={price} ingredients={ingredients} id={id} key={id} />
     });
 
     return allOrders;

@@ -8,7 +8,7 @@ interface stateWithError {
 
 const WithErrorHandler = (WrappedComponent: typeof React.Component, axios: AxiosInstance) => {
 
-  return class extends Component<{}, stateWithError> {
+  return class WithError extends Component<{}, stateWithError> {
 
     constructor(props: {}) {
       super(props);

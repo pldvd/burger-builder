@@ -8,7 +8,7 @@ export interface Ingredients {
     bacon: number,
     meat: number,
     [index: string] : number
-};
+}
 
 interface BurgerControlProps {
   ingredients: Ingredients,

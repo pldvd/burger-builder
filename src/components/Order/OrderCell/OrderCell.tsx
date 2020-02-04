@@ -4,7 +4,7 @@ import { OrdersInterface } from '../../../containers/Orders/Orders';
 
 function OrderCell(props: OrdersInterface): ReactElement {
   const ingreds = Object.keys(props.ingredients).map(id => (
-    <div className={style.ingred} id={id}>
+    <div className={style.ingred} id={id} key={id}>
       <span>{id}</span>
       <span>({props.ingredients[id]})</span>
     </div>

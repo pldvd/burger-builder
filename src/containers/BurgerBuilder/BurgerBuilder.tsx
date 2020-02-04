@@ -6,7 +6,6 @@ import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
-
 import { RouteComponentProps } from 'react-router-dom';
 
 interface BurgerBuilderState {
@@ -59,7 +58,7 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
       .then(response => {
         this.setState({ ingredients: response.data })
       })
-      .catch(err => {
+      .catch(() => {
         this.setState({ hasError: true, httpErrorMsg: this.props.httpError });
       })
   }
