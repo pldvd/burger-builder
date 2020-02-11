@@ -7,16 +7,21 @@ import styles from './CheckoutForm.module.scss';
 import { IngredientType } from '../../../components/Burger/Burger';
 import Axios from '../../../axios';
 
+interface CustomerDataInterface {
+  name: string,
+  email: string,
+  address: {
+    street: string,
+    postalCode: string,
+    country: string
+  }
+}
+
 interface CheckoutFormInterface {
-  customerData: {
-    name: string,
-    email: string,
-    address: {
-      street: string,
-      postalCode: string,
-    }
-  },
+  customerData: CustomerDataInterface,
+  deliveryMethod: string,
   isLoading: boolean,
+  [i: string]: string | boolean | CustomerDataInterface
 }
 
 interface CheckoutFormProps extends RouteComponentProps {
@@ -26,7 +31,19 @@ interface CheckoutFormProps extends RouteComponentProps {
 
 class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
-  state = {} as CheckoutFormInterface;
+  state = {
+    customerData: {
+      name: "",
+      email: "",
+      address: {
+        street: "",
+        postalCode: "",
+        country: ""
+      }
+    },
+    deliveryMethod: "",
+    isLoading: false
+  };
 
   handleSend = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,11 +57,12 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       ingredients: this.props.ingredients,
       price: this.props.finalPrice,
       customer: {
-        name: 'Latest G RAsta',
-        email: 'bla@bla.com',
+        name: this.state.customerData.name,
+        email: this.state.customerData.email,
         address: {
-          street: 'Wendy str. 23',
-          postalCode: '2030'
+          street: this.state.customerData.address.street,
+          postalCode: this.state.customerData.address.postalCode,
+          country: this.state.customerData.address.country
         }
       }
     }
@@ -68,18 +86,118 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       });
   }
 
+  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    switch (e.target.name) {
+      case ('name'):
+        this.setState({ 
+          customerData: { ...this.state.customerData, name: e.target.value } 
+        });
+        break;
+      case ('street'):
+        this.setState({
+          customerData: {
+            ...this.state.customerData,
+            address: {
+              ...this.state.customerData.address,
+              street: e.target.value
+            }
+          }
+        });
+        break;
+      case ('zip-code'):
+        this.setState({
+          customerData: {
+            ...this.state.customerData,
+            address: {
+              ...this.state.customerData.address,
+              postalCode: e.target.value
+            }
+          }
+        });
+        break;
+      case ('country'):
+        this.setState({
+          customerData: {
+            ...this.state.customerData,
+            address: {
+              ...this.state.customerData.address,
+              country: e.target.value
+            }
+          }
+        });
+        break;
+      case ('email'):
+        this.setState({ 
+          customerData: { ...this.state.customerData, email: e.target.value } 
+        });
+        break;
+      case ('delivery-method'):
+        this.setState({ deliveryMethod: e.target.value });
+        break;
+    }
+    // console.log(e);
+  }
+
   render() {
     console.log('*******RENDER*****' + this.props.finalPrice)
     let form = (
       <div className={styles.CheckoutForm}>
         <h2>Enter your contact details please</h2>
         <form>
-          <Input inputtype="input" type="text" name="name" id="name" placeholder="Enter your name." value=""/>
-          <Input inputtype="input" type="text" name="street" id="street" placeholder="Enter your street name." value=""/>
-          <Input inputtype="input" type="text" name="zip-code" id="zip-code" placeholder="Enter your zip-code." value=""/>
-          <Input inputtype="input" type="text" name="country" id="country" placeholder="Enter your country." value=""/>
-          <Input inputtype="input" type="email" name="email" id="email" placeholder="Enter your email." value=""/>
-          <Input inputtype="select" name="delivery-method" id="delivery-method" displayvalues={['Fastest', 'Cheapest']} value=""/>
+          <Input
+            inputtype="input"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name."
+            // value={this.state.customerData.name}
+            onChange={this.handleInputChange}
+          />
+          <Input
+            inputtype="input"
+            type="text"
+            name="street"
+            id="street"
+            placeholder="Enter your street name."
+            // value={this.state.customerData.address.street}
+            onChange={this.handleInputChange}
+          />
+          <Input
+            inputtype="input"
+            type="text"
+            name="zip-code"
+            id="zip-code"
+            placeholder="Enter your zip-code."
+            // value={this.state.customerData.address.postalCode}
+            onChange={this.handleInputChange}
+          />
+          <Input
+            inputtype="input"
+            type="text"
+            name="country"
+            id="country"
+            placeholder="Enter your country."
+            // value={this.state.customerData.address.country}
+            onChange={this.handleInputChange}
+          />
+          <Input
+            inputtype="input"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email."
+            // value={this.state.customerData.email}
+            onChange={this.handleInputChange}
+          />
+          <Input
+            inputtype="select"
+            name="delivery-method"
+            id="delivery-method"
+            displayvalues={['Fastest', 'Cheapest']}
+            // value={this.state.deliveryMethod}
+            onChange={this.handleInputChange}
+          />
           <Button color="green" clicked={this.handleSend}>Send</Button>
         </form>
       </div>
