@@ -16,10 +16,6 @@ interface CheckoutFormInterface {
       postalCode: string,
     }
   },
-  orderDetails: {
-    ingredients: IngredientType,
-    finalPrice: number | null
-  }
   isLoading: boolean,
 }
 
@@ -34,17 +30,17 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
   handleSend = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(this.props);
+    console.log(this.props.finalPrice, this.props.ingredients);
 
     this.setState({
       isLoading: true,
     })
 
     const order = {
-      ingredients: this.state.orderDetails.ingredients,
-      price: this.state.orderDetails.finalPrice,
+      ingredients: this.props.ingredients,
+      price: this.props.finalPrice,
       customer: {
-        name: 'Peter Pan',
+        name: 'Latest G RAsta',
         email: 'bla@bla.com',
         address: {
           street: 'Wendy str. 23',
@@ -72,16 +68,8 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       });
   }
 
-  componentDidMount() {
-    this.setState({
-      orderDetails: {
-        ingredients: this.props.ingredients,
-        finalPrice: this.props.finalPrice
-      }
-    });
-  }
-
   render() {
+    console.log('*******RENDER*****' + this.props.finalPrice)
     let form = (
       <div className={styles.CheckoutForm}>
         <h2>Enter your contact details please</h2>
