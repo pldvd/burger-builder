@@ -86,10 +86,12 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       <div className={styles.CheckoutForm}>
         <h2>Enter your contact details please</h2>
         <form>
-          <Input type="text" name="name" placeholder="Enter your name." />
-          <Input type="email" name="email" placeholder="Enter your email." />
-          <Input type="text" name="street" placeholder="Enter your street name." />
-          <Input type="text" name="postal" placeholder="Enter your postal code." />
+          <Input inputtype="input" type="text" name="name" id="name" placeholder="Enter your name." />
+          <Input inputtype="input" type="text" name="street" id="street" placeholder="Enter your street name." />
+          <Input inputtype="input" type="text" name="zip-code" id="zip-code" placeholder="Enter your zip-code." />
+          <Input inputtype="input" type="text" name="country" id="country" placeholder="Enter your country." />
+          <Input inputtype="input" type="email" name="email" id="email" placeholder="Enter your email." />
+          <Input inputtype="select" name="delivery-method" id="delivery-method" displayvalues={['Fastest', 'Cheapest']} />
           <Button color="green" clicked={this.handleSend}>Send</Button>
         </form>
       </div>
