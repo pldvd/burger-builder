@@ -136,11 +136,9 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
         this.setState({ deliveryMethod: e.target.value });
         break;
     }
-    // console.log(e);
   }
 
   render() {
-    console.log('*******RENDER*****' + this.props.finalPrice)
     let form = (
       <div className={styles.CheckoutForm}>
         <h2>Enter your contact details please</h2>
@@ -151,7 +149,6 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             name="name"
             id="name"
             placeholder="Enter your name."
-            // value={this.state.customerData.name}
             onChange={this.handleInputChange}
           />
           <Input
@@ -160,7 +157,6 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             name="street"
             id="street"
             placeholder="Enter your street name."
-            // value={this.state.customerData.address.street}
             onChange={this.handleInputChange}
           />
           <Input
@@ -169,7 +165,6 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             name="zip-code"
             id="zip-code"
             placeholder="Enter your zip-code."
-            // value={this.state.customerData.address.postalCode}
             onChange={this.handleInputChange}
           />
           <Input
@@ -178,7 +173,6 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             name="country"
             id="country"
             placeholder="Enter your country."
-            // value={this.state.customerData.address.country}
             onChange={this.handleInputChange}
           />
           <Input
@@ -187,7 +181,6 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             name="email"
             id="email"
             placeholder="Enter your email."
-            // value={this.state.customerData.email}
             onChange={this.handleInputChange}
           />
           <Input
@@ -195,7 +188,6 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             name="delivery-method"
             id="delivery-method"
             displayvalues={['Fastest', 'Cheapest']}
-            // value={this.state.deliveryMethod}
             onChange={this.handleInputChange}
           />
           <Button color="green" clicked={this.handleSend}>Send</Button>
