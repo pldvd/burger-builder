@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import Button from '../../../components/UI/Button/Button';
+import Input from '../../../components/UI/Input/Input';
 import Loader from '../../../components/UI/Loader/Loader';
 import styles from './CheckoutForm.module.scss';
 import { IngredientType } from '../../../components/Burger/Burger';
@@ -85,10 +86,10 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       <div className={styles.CheckoutForm}>
         <h2>Enter your contact details please</h2>
         <form>
-          <input type="text" name="name" placeholder="Enter your name." />
-          <input type="email" name="email" placeholder="Enter your email." />
-          <input type="text" name="street" placeholder="Enter your street name." />
-          <input type="text" name="postal" placeholder="Enter your postal code." />
+          <Input type="text" name="name" placeholder="Enter your name." />
+          <Input type="email" name="email" placeholder="Enter your email." />
+          <Input type="text" name="street" placeholder="Enter your street name." />
+          <Input type="text" name="postal" placeholder="Enter your postal code." />
           <Button color="green" clicked={this.handleSend}>Send</Button>
         </form>
       </div>
