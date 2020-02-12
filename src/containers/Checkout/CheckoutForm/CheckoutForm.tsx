@@ -7,21 +7,20 @@ import styles from './CheckoutForm.module.scss';
 import { IngredientType } from '../../../components/Burger/Burger';
 import Axios from '../../../axios';
 
-interface CustomerDataInterface {
+interface orderDataInterface {
   name: string,
   email: string,
-  address: {
-    street: string,
-    postalCode: string,
-    country: string
-  }
+  street: string,
+  postalCode: string,
+  country: string,
+  deliveryMethod: string,
+  [i: string]: string
 }
 
 interface CheckoutFormInterface {
-  customerData: CustomerDataInterface,
-  deliveryMethod: string,
+  orderData: orderDataInterface,
   isLoading: boolean,
-  [i: string]: string | boolean | CustomerDataInterface
+  [i: string]: string | boolean | orderDataInterface
 }
 
 interface CheckoutFormProps extends RouteComponentProps {
@@ -32,16 +31,14 @@ interface CheckoutFormProps extends RouteComponentProps {
 class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
   state = {
-    customerData: {
+    orderData: {
       name: "",
       email: "",
-      address: {
-        street: "",
-        postalCode: "",
-        country: ""
-      }
+      street: "",
+      postalCode: "",
+      country: "",
+      deliveryMethod: ""
     },
-    deliveryMethod: "",
     isLoading: false
   };
 
@@ -57,12 +54,12 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       ingredients: this.props.ingredients,
       price: this.props.finalPrice,
       customer: {
-        name: this.state.customerData.name,
-        email: this.state.customerData.email,
+        name: this.state.orderData.name,
+        email: this.state.orderData.email,
         address: {
-          street: this.state.customerData.address.street,
-          postalCode: this.state.customerData.address.postalCode,
-          country: this.state.customerData.address.country
+          street: this.state.orderData.street,
+          postalCode: this.state.orderData.postalCode,
+          country: this.state.orderData.country
         }
       }
     }
@@ -87,55 +84,23 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
   }
 
   handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
+    let name = '';
+    
     switch (e.target.name) {
-      case ('name'):
-        this.setState({ 
-          customerData: { ...this.state.customerData, name: e.target.value } 
-        });
+      case 'zip-code':
+        name = 'postalCode';
         break;
-      case ('street'):
-        this.setState({
-          customerData: {
-            ...this.state.customerData,
-            address: {
-              ...this.state.customerData.address,
-              street: e.target.value
-            }
-          }
-        });
+      case 'delivery-method':
+        name = 'deliveryMethod';
         break;
-      case ('zip-code'):
-        this.setState({
-          customerData: {
-            ...this.state.customerData,
-            address: {
-              ...this.state.customerData.address,
-              postalCode: e.target.value
-            }
-          }
-        });
-        break;
-      case ('country'):
-        this.setState({
-          customerData: {
-            ...this.state.customerData,
-            address: {
-              ...this.state.customerData.address,
-              country: e.target.value
-            }
-          }
-        });
-        break;
-      case ('email'):
-        this.setState({ 
-          customerData: { ...this.state.customerData, email: e.target.value } 
-        });
-        break;
-      case ('delivery-method'):
-        this.setState({ deliveryMethod: e.target.value });
-        break;
+      default:
+        name = e.target.name;
     }
+
+    const orderDataCopy = { ...this.state.orderData } as orderDataInterface;
+    orderDataCopy[name] = e.target.value;
+
+    this.setState({ orderData: orderDataCopy });
   }
 
   render() {
