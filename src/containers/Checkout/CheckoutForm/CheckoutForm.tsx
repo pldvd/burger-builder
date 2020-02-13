@@ -20,6 +20,7 @@ interface orderDataInterface {
 interface CheckoutFormInterface {
   orderData: orderDataInterface,
   isLoading: boolean,
+  formIsValid: boolean,
   [i: string]: string | boolean | orderDataInterface
 }
 
@@ -39,7 +40,8 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       country: "",
       deliveryMethod: ""
     },
-    isLoading: false
+    isLoading: false,
+    formIsValid: false
   };
 
   handleSend = (e: React.FormEvent) => {
@@ -60,7 +62,8 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
           street: this.state.orderData.street,
           postalCode: this.state.orderData.postalCode,
           country: this.state.orderData.country
-        }
+        },
+        deliveryMethod: this.state.orderData.deliveryMethod
       }
     }
 
@@ -85,7 +88,9 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
   handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = '';
-    
+
+    //invoke custom validation funciton here -- to be written
+
     switch (e.target.name) {
       case 'zip-code':
         name = 'postalCode';
@@ -155,7 +160,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             displayvalues={['Fastest', 'Cheapest']}
             onChange={this.handleInputChange}
           />
-          <Button color="green" clicked={this.handleSend}>Send</Button>
+          <Button color={this.state.formIsValid ? 'green' : 'red'} clicked={this.handleSend} isDisabled={!this.state.formIsValid}>Send</Button>
         </form>
       </div>
     );
