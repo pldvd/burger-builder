@@ -9,18 +9,25 @@ import Axios from '../../../axios';
 
 interface orderDataInterface {
   name: string,
+  nameIsValid: boolean,
   email: string,
+  emailIsValid: boolean,
   street: string,
+  streetIsValid: boolean,
   postalCode: string,
+  postalCodeIsValid: boolean,
   country: string,
+  countryIsValid: boolean,
   deliveryMethod: string,
-  [i: string]: string
+  deliveryMethodIsValid: boolean,
+  [i: string]: string | boolean
 }
 
 interface CheckoutFormInterface {
   orderData: orderDataInterface,
   isLoading: boolean,
   formIsValid: boolean,
+  formIsTouched: boolean,
   [i: string]: string | boolean | orderDataInterface
 }
 
@@ -34,14 +41,21 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
   state = {
     orderData: {
       name: "",
+      nameIsValid: true,
       email: "",
+      emailIsValid: true,
       street: "",
+      streetIsValid: true,
       postalCode: "",
+      postalCodeIsValid: true,
       country: "",
-      deliveryMethod: ""
+      countryIsValid: true,
+      deliveryMethod: "",
+      deliveryMethodIsValid: true
     },
     isLoading: false,
-    formIsValid: false
+    formIsValid: false,
+    formIsTouched: false
   };
 
   handleSend = (e: React.FormEvent) => {
@@ -86,26 +100,55 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       });
   }
 
+  validateInput = (input: string, validationRule: RegExp): boolean => {
+    return validationRule.test(input);
+  }
+
   handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = '';
+    let nameIsValid = true;
+    let currentValue = e.target.value;
 
-    //invoke custom validation funciton here -- to be written
+    if (!this.state.formIsTouched) {
+      this.setState({ formIsTouched: true });
+    }
 
     switch (e.target.name) {
       case 'zip-code':
         name = 'postalCode';
+        nameIsValid = this.validateInput(currentValue, /^\d{4,6}$/);
         break;
       case 'delivery-method':
         name = 'deliveryMethod';
+        nameIsValid = true; //this is referencing a 'select' input, so no need to validate it: even if the user doesn't touch it, it should be fine
         break;
-      default:
+      case 'name':
         name = e.target.name;
+        nameIsValid = this.validateInput(currentValue, /^\w{2,} \w{3,}$/);
+        break;
+      case 'street':
+        name = e.target.name;
+        nameIsValid = this.validateInput(currentValue, /^\d+\.? \w{3,} \w{3,}?$/);
+        break;
+      case 'email':
+        name = e.target.name;
+        nameIsValid = this.validateInput(currentValue, /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/);
+        break;
+      case 'country':
+        name = e.target.name;
+        nameIsValid = this.validateInput(currentValue, /[a-zA-Z]{4,}/);
+        break;
     }
 
     const orderDataCopy = { ...this.state.orderData } as orderDataInterface;
-    orderDataCopy[name] = e.target.value;
+    orderDataCopy[name] = currentValue;
+    orderDataCopy[`${name}isValid`] = nameIsValid;
 
     this.setState({ orderData: orderDataCopy });
+
+    if (this.state.formIsTouched && this.state.orderData.nameIsValid && this.state.orderData.emailIsValid && this.state.orderData.countryIsValid && this.state.orderData.deliveryMethodIsValid && this.state.orderData.postalCodeIsValid) {
+      this.setState({ formIsValid: true });
+    }
   }
 
   render() {
