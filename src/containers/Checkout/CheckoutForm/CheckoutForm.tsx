@@ -156,7 +156,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
     let form = (
       <div className={styles.CheckoutForm}>
         <h2>Enter your contact details please</h2>
-        <form>
+        <form onSubmit={this.handleSend}>
           <Input
             inputtype="input"
             type="text"
@@ -204,7 +204,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             displayvalues={['Please select...','Fastest', 'Cheapest']}
             onChange={this.handleInputChange}
           />
-          <Button color={'green'} clicked={this.handleSend} isDisabled={!this.state.formIsValid}>Send</Button>
+          <Button color={'green'} isDisabled={!this.state.formIsValid}>Send</Button>
         </form>
       </div>
     );

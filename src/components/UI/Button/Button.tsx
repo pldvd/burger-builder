@@ -4,7 +4,7 @@ import style from './Button.module.scss';
 export interface ButtonProps {
   color: string,
   isDisabled?: boolean,
-  clicked: (e: React.FormEvent) => void
+  clicked?: (e: React.FormEvent) => void
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
