@@ -41,17 +41,17 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
   state = {
     orderData: {
       name: "",
-      nameIsValid: true,
+      nameIsValid: false,
       email: "",
-      emailIsValid: true,
+      emailIsValid: false,
       street: "",
-      streetIsValid: true,
+      streetIsValid: false,
       postalCode: "",
-      postalCodeIsValid: true,
+      postalCodeIsValid: false,
       country: "",
-      countryIsValid: true,
+      countryIsValid: false,
       deliveryMethod: "",
-      deliveryMethodIsValid: true
+      deliveryMethodIsValid: false
     },
     isLoading: false,
     formIsValid: false,
@@ -106,12 +106,8 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
   handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = '';
-    let nameIsValid = true;
+    let nameIsValid = false;
     let currentValue = e.target.value;
-
-    if (!this.state.formIsTouched) {
-      this.setState({ formIsTouched: true });
-    }
 
     switch (e.target.name) {
       case 'zip-code':
@@ -126,9 +122,9 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
         name = e.target.name;
         nameIsValid = this.validateInput(currentValue, /^\w{2,} \w{3,}$/);
         break;
-      case 'street':
-        name = e.target.name;
-        nameIsValid = this.validateInput(currentValue, /^\d+\.? \w{3,} \w{3,}?$/);
+      case 'address':
+        name = 'street';
+        nameIsValid = this.validateInput(currentValue, /^\d+\.? \w{3,} \w{3,}?.?$/);
         break;
       case 'email':
         name = e.target.name;
@@ -142,13 +138,18 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
     const orderDataCopy = { ...this.state.orderData } as orderDataInterface;
     orderDataCopy[name] = currentValue;
-    orderDataCopy[`${name}isValid`] = nameIsValid;
+    orderDataCopy[`${name}IsValid`] = nameIsValid;
 
-    this.setState({ orderData: orderDataCopy });
-
-    if (this.state.formIsTouched && this.state.orderData.nameIsValid && this.state.orderData.emailIsValid && this.state.orderData.countryIsValid && this.state.orderData.deliveryMethodIsValid && this.state.orderData.postalCodeIsValid) {
-      this.setState({ formIsValid: true });
+    if (!this.state.formIsTouched) {
+      this.setState({ formIsTouched: true });
     }
+    const isFormValid = (state: CheckoutFormInterface): boolean => {
+      return(state.formIsTouched && state.orderData.nameIsValid && state.orderData.emailIsValid && state.orderData.countryIsValid && state.orderData.deliveryMethodIsValid && state.orderData.postalCodeIsValid);
+    }
+
+    this.setState({ orderData: orderDataCopy }, () => {
+      this.setState({formIsValid: isFormValid(this.state)}) //need to validate form once orderData state is surely updated, hence the setState in callback
+    });
   }
 
   render() {
@@ -167,9 +168,9 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
           <Input
             inputtype="input"
             type="text"
-            name="street"
-            id="street"
-            placeholder="Enter your street name."
+            name="address"
+            id="address"
+            placeholder="Enter house number followed by street name."
             onChange={this.handleInputChange}
           />
           <Input
@@ -203,7 +204,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             displayvalues={['Fastest', 'Cheapest']}
             onChange={this.handleInputChange}
           />
-          <Button color={this.state.formIsValid ? 'green' : 'red'} clicked={this.handleSend} isDisabled={!this.state.formIsValid}>Send</Button>
+          <Button color={'green'} clicked={this.handleSend} isDisabled={!this.state.formIsValid}>Send</Button>
         </form>
       </div>
     );

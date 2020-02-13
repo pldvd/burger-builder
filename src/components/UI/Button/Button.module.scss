@@ -11,6 +11,14 @@
 
   &:hover {
     transform: translateY(-.3rem);
+
+    &:disabled {
+      transform: none;
+    }
+  }
+
+  &:disabled {
+    color: #ccc;
   }
 }
 
