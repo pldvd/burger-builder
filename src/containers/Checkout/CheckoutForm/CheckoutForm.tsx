@@ -51,7 +51,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       country: "",
       countryIsValid: false,
       deliveryMethod: "",
-      deliveryMethodIsValid: false
+      deliveryMethodIsValid: false,
     },
     isLoading: false,
     formIsValid: false,
@@ -116,7 +116,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
         break;
       case 'delivery-method':
         name = 'deliveryMethod';
-        nameIsValid = true; //this is referencing a 'select' input, so no need to validate it: even if the user doesn't touch it, it should be fine
+        nameIsValid = this.validateInput(currentValue, /Fastest|Cheapest/);
         break;
       case 'name':
         name = e.target.name;
@@ -201,7 +201,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             inputtype="select"
             name="delivery-method"
             id="delivery-method"
-            displayvalues={['Fastest', 'Cheapest']}
+            displayvalues={['Please select...','Fastest', 'Cheapest']}
             onChange={this.handleInputChange}
           />
           <Button color={'green'} clicked={this.handleSend} isDisabled={!this.state.formIsValid}>Send</Button>
