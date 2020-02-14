@@ -28,7 +28,8 @@ interface CheckoutFormInterface {
   isLoading: boolean,
   formIsValid: boolean,
   formIsTouched: boolean,
-  [i: string]: string | boolean | orderDataInterface
+  touchedFields: string[],
+  [i: string]: string | boolean | orderDataInterface | string[]
 }
 
 interface CheckoutFormProps extends RouteComponentProps {
@@ -55,7 +56,8 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
     },
     isLoading: false,
     formIsValid: false,
-    formIsTouched: false
+    formIsTouched: false,
+    touchedFields: [] as string[]
   };
 
   handleSend = (e: React.FormEvent) => {
@@ -140,6 +142,8 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
     orderDataCopy[name] = currentValue;
     orderDataCopy[`${name}IsValid`] = nameIsValid;
 
+    const touchedFieldsCopy = [...this.state.touchedFields].concat(e.target.name);
+
     if (!this.state.formIsTouched) {
       this.setState({ formIsTouched: true });
     }
@@ -147,7 +151,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       return(state.formIsTouched && state.orderData.nameIsValid && state.orderData.emailIsValid && state.orderData.countryIsValid && state.orderData.deliveryMethodIsValid && state.orderData.postalCodeIsValid);
     }
 
-    this.setState({ orderData: orderDataCopy }, () => {
+    this.setState({ orderData: orderDataCopy, touchedFields: touchedFieldsCopy }, () => {
       this.setState({formIsValid: isFormValid(this.state)}) //need to validate form once orderData state is surely updated, hence the setState in callback
     });
   }
@@ -164,6 +168,8 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             id="name"
             placeholder="Enter your name."
             onChange={this.handleInputChange}
+            isValid={this.state.orderData.nameIsValid}
+            touchedFields={this.state.touchedFields}
           />
           <Input
             inputtype="input"
@@ -172,6 +178,8 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             id="address"
             placeholder="Enter house number followed by street name."
             onChange={this.handleInputChange}
+            isValid={this.state.orderData.streetIsValid}
+            touchedFields={this.state.touchedFields}
           />
           <Input
             inputtype="input"
@@ -180,7 +188,9 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             id="zip-code"
             placeholder="Enter your zip-code."
             onChange={this.handleInputChange}
-          />
+            isValid={this.state.orderData.postalCodeIsValid}
+            touchedFields={this.state.touchedFields}
+            />
           <Input
             inputtype="input"
             type="text"
@@ -188,7 +198,9 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             id="country"
             placeholder="Enter your country."
             onChange={this.handleInputChange}
-          />
+            isValid={this.state.orderData.countryIsValid}
+            touchedFields={this.state.touchedFields}
+            />
           <Input
             inputtype="input"
             type="email"
@@ -196,13 +208,17 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
             id="email"
             placeholder="Enter your email."
             onChange={this.handleInputChange}
-          />
+            isValid={this.state.orderData.emailIsValid}
+            touchedFields={this.state.touchedFields}
+            />
           <Input
             inputtype="select"
             name="delivery-method"
             id="delivery-method"
             displayvalues={['Please select...','Fastest', 'Cheapest']}
             onChange={this.handleInputChange}
+            isValid={this.state.orderData.deliveryMethodIsValid}
+            touchedFields={this.state.touchedFields}
           />
           <Button color={'green'} isDisabled={!this.state.formIsValid}>Send</Button>
         </form>

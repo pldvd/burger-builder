@@ -4,27 +4,32 @@ import styles from './Input.module.scss';
 const Input = (props) => {
 
   let inputElement = null;
+  const { isValid, touchedFields, ...rest } = props;
+  const hasBeenTouched = touchedFields.includes(props.name);
+  const inPutStyles = [styles.inputElement];
 
-  switch (props.inputtype) {
+  (hasBeenTouched && !isValid) && inPutStyles.push(styles.invalidField);
+
+  switch (rest.inputtype) {
     case ('input'):
-      inputElement = <input className={styles.inputElement} {...props} />;
+      inputElement = <input className={inPutStyles.join(' ')} {...rest} />;
       break;
     case ('select'):
-      inputElement = <select className={styles.inputElement} {...props}>
+      inputElement = <select className={inPutStyles.join(' ')} {...rest}>
         {
-          props.displayvalues.map(displayValue => {
+          rest.displayvalues.map(displayValue => {
             return <option value={displayValue} key={displayValue}>{displayValue}</option>
           })
         }
       </select>;
       break;
     default:
-      inputElement = <input className={styles.inputElement} {...props} />;
+      inputElement = <input className={inPutStyles.join(' ')} {...rest} />;
   }
 
   return (
     <div className={styles.Input}>
-      <label className={styles.label} htmlFor={props.id}>{props.name}</label>
+      <label className={styles.label} htmlFor={rest.id}>{rest.name}</label>
       {inputElement}
     </div>
   )
