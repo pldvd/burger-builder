@@ -1,5 +1,6 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { IngredientType } from '../../components/Burger/Burger';
+import { BurgerState } from '../../store/reducers/types';
 
 export interface BurgerBuilderState {
   ingredients: IngredientType,
@@ -14,7 +15,8 @@ export interface BurgerBuilderState {
 export interface BurgerBuilderProps extends RouteComponentProps {
   httpError: null | { message: string },
   ingredients: IngredientType,
-  finalPrice: number
+  finalPrice: number,
+  changeAmount: () => BurgerState;
 }
 
 export interface IngredientPriceListInterface {

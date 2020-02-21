@@ -8,7 +8,7 @@ import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 import { BurgerBuilderState, BurgerBuilderProps, IngredientPriceListInterface } from './types';
 import { IngredientType } from '../../components/Burger/Burger';
-import {BurgerState} from '../../store/reducers/types';
+import { BurgerState } from '../../store/reducers/types';
 import { connect } from 'react-redux';
 
 
@@ -119,7 +119,7 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
           <Burger ingredients={this.props.ingredients} />
           <BurgerControls
             ingredients={this.props.ingredients}
-            changeAmount={this.changeAmount}
+            changeAmount={this.props.changeAmount}
             price={this.props.finalPrice}
             canPurchase={this.state.isPurchasable}
             setVisibility={this.setModalVisibility} />
@@ -151,4 +151,10 @@ const mapStateToProps = (state: BurgerState): BurgerState => {
   }
 }
 
-export default connect(mapStateToProps)(WithErrorHandler(BurgerBuilder, axios));
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    changeAmount: (lessOrMore: string, ingredient: string): BurgerState => dispatch({ type: 'CHANGEAMOUNT', ingredient, lessOrMore })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler(BurgerBuilder, axios));
