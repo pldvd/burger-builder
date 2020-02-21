@@ -3,8 +3,6 @@ import { IngredientType } from '../../components/Burger/Burger';
 import { BurgerState } from '../../store/reducers/types';
 
 export interface BurgerBuilderState {
-  ingredients: IngredientType,
-  finalPrice: number,
   isPurchasable: boolean,
   modalIsOpen: boolean,
   isLoading: boolean,
@@ -17,6 +15,7 @@ export interface BurgerBuilderProps extends RouteComponentProps {
   ingredients: IngredientType,
   finalPrice: number,
   changeAmount: () => BurgerState;
+  cancel: () => BurgerState;
 }
 
 export interface IngredientPriceListInterface {

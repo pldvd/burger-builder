@@ -28,7 +28,6 @@ const reducer = (state = initialState, action) => {
           ingredients: {
             ...state.ingredients,
             [ingred]: state.ingredients[ingred] - 1,
-            // [ingred]: state.ingredients[ingred] > 0 ? state.ingredients[ingred] - 1 : state.ingredients[ingred],
           },
           finalPrice: state.finalPrice > 4 ? state.finalPrice - IngredientPriceList[ingred] : state.finalPrice,
         }
@@ -41,7 +40,8 @@ const reducer = (state = initialState, action) => {
           finalPrice: state.finalPrice + IngredientPriceList[ingred],
         }
       }
-
+    case 'CANCELORDERS':
+      return initialState;
     default: return state;
   }
 }

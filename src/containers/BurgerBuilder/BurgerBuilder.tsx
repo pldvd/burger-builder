@@ -6,8 +6,7 @@ import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
-import { BurgerBuilderState, BurgerBuilderProps, IngredientPriceListInterface } from './types';
-import { IngredientType } from '../../components/Burger/Burger';
+import { BurgerBuilderState, BurgerBuilderProps } from './types';
 import { BurgerState } from '../../store/reducers/types';
 import { connect } from 'react-redux';
 
@@ -18,8 +17,6 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
     super(props);
 
     this.state = {
-      ingredients: {} as IngredientType,
-      finalPrice: 4,
       isPurchasable: false,
       modalIsOpen: false,
       isLoading: false,
@@ -28,52 +25,12 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
     }
   }
 
-  IngredientPriceList: IngredientPriceListInterface = {
-    salad: .5,
-    cheese: 1,
-    bacon: 1,
-    meat: 2,
-  }
-
-  componentDidMount() {
-    // this.setState({ isLoading: true })
-
-    // axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.json')
-    //   .then(response => {
-    //     this.setState({ ingredients: response.data, isLoading: false })
-    //   })
-    //   .catch(() => {
-    //     this.setState({ isLoading: false, hasError: true, httpErrorMsg: this.props.httpError });
-    //   })
-  }
-
-  changeAmount = (lessOrMore: string, ingredient: string) => {
-    if (lessOrMore === 'less') {
-      this.setState(prevState => {
-        return {
-          ingredients: {
-            ...prevState.ingredients,
-            [ingredient]: prevState.ingredients[ingredient] - 1,
-          },
-          finalPrice: prevState.finalPrice - this.IngredientPriceList[ingredient],
-        }
-      }, () => this.checkIfPurchasable(this.state.ingredients)
-      );
-    } else if (lessOrMore === 'more') {
-      this.setState(prevState => {
-        return {
-          ingredients: {
-            ...prevState.ingredients,
-            [ingredient]: prevState.ingredients[ingredient] + 1,
-          },
-          finalPrice: prevState.finalPrice + this.IngredientPriceList[ingredient],
-        }
-      }, () => this.checkIfPurchasable(this.state.ingredients)
-      );
+  componentDidUpdate(prevProps: BurgerBuilderProps, prevState: BurgerBuilderState) {
+    if (prevProps.ingredients !== this.props.ingredients) {
+      this.checkIfPurchasable(this.props.ingredients)
     }
   }
 
-  //This will be added as a second parameter/callback to setState - this makes sure it runs once the state shows latest ingredients object
   checkIfPurchasable = (ingredients: { [key: string]: number }) => {
     const canPurchase = Object.values(ingredients).reduce((sum, currentVal) => sum + currentVal) > 0;
 
@@ -89,23 +46,17 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   continueOrder = () => {
     let query: string[] = [];
 
-    Object.keys(this.state.ingredients).forEach(key => {
-      query.push(key + '=' + this.state.ingredients[key]);
+    Object.keys(this.props.ingredients).forEach(key => {
+      query.push(key + '=' + this.props.ingredients[key]);
     })
 
-    this.props.history.push('/checkout?' + query.join('&') + `&price=${this.state.finalPrice}`);
+    this.props.history.push('/checkout?' + query.join('&') + `&price=${this.props.finalPrice}`);
   }
 
   cancelOrder = () => {
+    this.props.cancel();
+
     this.setState({
-      ingredients: {
-        salad: 0,
-        cheese: 0,
-        bacon: 0,
-        meat: 0,
-      },
-      finalPrice: 4,
-      isPurchasable: false,
       modalIsOpen: false,
     })
   }
@@ -130,11 +81,11 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
     return (
       <Fragment>
         <Modal isOpen={this.state.modalIsOpen} isLoading={this.state.isLoading} setVisibility={this.setModalVisibility}>
-          <OrderSummary ingredients={this.state.ingredients || {}}
+          <OrderSummary ingredients={this.props.ingredients}
             setVisibility={this.setModalVisibility}
             continueOrder={this.continueOrder}
             cancelOrder={this.cancelOrder}
-            price={this.state.finalPrice}
+            price={this.props.finalPrice}
             loading={this.state.isLoading}
           />
         </Modal>
@@ -153,7 +104,8 @@ const mapStateToProps = (state: BurgerState): BurgerState => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    changeAmount: (lessOrMore: string, ingredient: string): BurgerState => dispatch({ type: 'CHANGEAMOUNT', ingredient, lessOrMore })
+    changeAmount: (lessOrMore: string, ingredient: string): BurgerState => dispatch({ type: 'CHANGEAMOUNT', ingredient, lessOrMore }),
+    cancel: () => dispatch({type:'CANCELORDERS'})
   }
 }
 
