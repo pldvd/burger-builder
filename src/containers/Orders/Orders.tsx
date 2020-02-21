@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import OrderCell from '../../components/Order/OrderCell/OrderCell';
 import Axios from '../../axios';
-import { Ingredients } from '../../components/BurgerControls/BurgerControls';
-
-export interface OrdersInterface {
-  ingredients: Ingredients,
-  price: number,
-  id: string,
-}
+import {OrdersInterface} from './types';
 
 class Orders extends Component<{}, { orders: OrdersInterface[] }> {
 

@@ -21,6 +21,7 @@ class Checkout extends Component<RouteComponentProps, { ingredients: IngredientT
   }
 
   componentDidMount() {
+    //this is passed in search params, would be cooler to get them from redux
     const rawQuery = new URLSearchParams(this.props.location.search);
 
     const myIngreds: IngredientType = {

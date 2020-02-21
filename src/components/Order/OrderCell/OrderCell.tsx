@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import style from './OrderCell.module.scss';
-import { OrdersInterface } from '../../../containers/Orders/Orders';
+import { OrdersInterface } from '../../../containers/Orders/types';
 
 function OrderCell(props: OrdersInterface): ReactElement {
   const ingreds = Object.keys(props.ingredients).map(id => (
