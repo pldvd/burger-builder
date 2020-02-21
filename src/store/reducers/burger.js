@@ -47,29 +47,3 @@ const reducer = (state = initialState, action) => {
 }
 
 export default reducer;
-
-// changeAmount = (lessOrMore: string, ingredient: string) => {
-//   if (lessOrMore === 'less') {
-//     this.setState(prevState => {
-//       return {
-//         ingredients: {
-//           ...prevState.ingredients,
-//           [ingredient]: prevState.ingredients[ingredient] - 1,
-//         },
-//         finalPrice: prevState.finalPrice - this.IngredientPriceList[ingredient],
-//       }
-//     }, () => this.checkIfPurchasable(this.state.ingredients)
-//     );
-//   } else if (lessOrMore === 'more') {
-//     this.setState(prevState => {
-//       return {
-//         ingredients: {
-//           ...prevState.ingredients,
-//           [ingredient]: prevState.ingredients[ingredient] + 1,
-//         },
-//         finalPrice: prevState.finalPrice + this.IngredientPriceList[ingredient],
-//       }
-//     }, () => this.checkIfPurchasable(this.state.ingredients)
-//     );
-//   }
-// }
