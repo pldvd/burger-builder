@@ -11,20 +11,7 @@ import { orderDataInterface, CheckoutFormInterface, CheckoutFormProps } from './
 class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
   state = {
-    orderData: {
-      name: "",
-      nameIsValid: false,
-      email: "",
-      emailIsValid: false,
-      street: "",
-      streetIsValid: false,
-      postalCode: "",
-      postalCodeIsValid: false,
-      country: "",
-      countryIsValid: false,
-      deliveryMethod: "",
-      deliveryMethodIsValid: false,
-    },
+    orderData: {} as orderDataInterface,
     isLoading: false,
     formIsValid: false,
     formIsTouched: false,
