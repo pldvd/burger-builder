@@ -18,10 +18,11 @@ class Checkout extends Component<CheckoutProps> {
     this.props.history.goBack();
   }
 
+  //maybe remove the need to pass around props.indegredients in the render method...
   render() {
     return (
       <div>
-        <CheckoutSummary ingredients={this.props.ingredients} cancel={this.cancelOrder} continue={this.continueOrder} />
+        <CheckoutSummary cancel={this.cancelOrder} continue={this.continueOrder} />
         <Route path={this.props.match.url + '/checkout-form'} render={() => <CheckoutForm ingredients={this.props.ingredients} finalPrice={this.props.finalPrice} />} />
       </div>
     )

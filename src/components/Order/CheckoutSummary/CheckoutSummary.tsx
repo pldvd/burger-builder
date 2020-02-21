@@ -2,6 +2,8 @@ import React from 'react';
 import Burger, { BurgerProps } from '../../Burger/Burger';
 import Button from '../../UI/Button/Button';
 import styles from './CheckoutSummary.module.scss';
+import {connect} from 'react-redux';
+import { BurgerState } from '../../../store/reducers/types';
 
 interface CheckoutSummaryProps extends BurgerProps {
   continue: () => void,
@@ -25,4 +27,10 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = (props) => {
   )
 }
 
-export default CheckoutSummary;
+const mapStateToProps = (state: BurgerState) => {
+  return {
+    ingredients: state.ingredients
+  }
+}
+
+export default connect(mapStateToProps)(CheckoutSummary);
