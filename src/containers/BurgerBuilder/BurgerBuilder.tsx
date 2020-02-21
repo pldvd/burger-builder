@@ -7,6 +7,7 @@ import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 import {BurgerBuilderState, BurgerBuilderProps, IngredientPriceListInterface} from './types';
+import { IngredientType } from '../../components/Burger/Burger';
 
 class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
 
@@ -14,7 +15,7 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
     super(props);
 
     this.state = {
-      ingredients: null,
+      ingredients: {} as IngredientType,
       finalPrice: 4,
       isPurchasable: false,
       modalIsOpen: false,
@@ -32,12 +33,14 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 
   componentDidMount() {
+    this.setState({isLoading: true})
+
     axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.json')
       .then(response => {
-        this.setState({ ingredients: response.data })
+        this.setState({ ingredients: response.data, isLoading: false })
       })
       .catch(() => {
-        this.setState({ hasError: true, httpErrorMsg: this.props.httpError });
+        this.setState({ isLoading: false, hasError: true, httpErrorMsg: this.props.httpError });
       })
   }
 
@@ -107,7 +110,7 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   render() {
     let burger = this.state.hasError ? <p>{`${this.state.httpErrorMsg}`}</p> : <Loader />;
 
-    if (this.state.ingredients) {
+    if (!this.state.isLoading) {
       burger = (
         <Fragment>
           <Burger ingredients={this.state.ingredients} />

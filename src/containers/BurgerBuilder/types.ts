@@ -1,7 +1,8 @@
 import { RouteComponentProps } from 'react-router-dom';
+import { IngredientType } from '../../components/Burger/Burger';
 
 export interface BurgerBuilderState {
-  ingredients: any,
+  ingredients: IngredientType,
   finalPrice: number,
   isPurchasable: boolean,
   modalIsOpen: boolean,
