@@ -23,7 +23,7 @@ class Checkout extends Component<CheckoutProps> {
     return (
       <div>
         <CheckoutSummary cancel={this.cancelOrder} continue={this.continueOrder} />
-        <Route path={this.props.match.url + '/checkout-form'} render={() => <CheckoutForm ingredients={this.props.ingredients} finalPrice={this.props.finalPrice} />} />
+        <Route path={this.props.match.url + '/checkout-form'} render={() => <CheckoutForm />} />
       </div>
     )
   }

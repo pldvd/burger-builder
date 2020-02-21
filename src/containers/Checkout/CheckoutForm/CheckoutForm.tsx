@@ -6,6 +6,8 @@ import Loader from '../../../components/UI/Loader/Loader';
 import styles from './CheckoutForm.module.scss';
 import Axios from '../../../axios';
 import { orderDataInterface, CheckoutFormInterface, CheckoutFormProps } from './types';
+import {connect} from 'react-redux';
+import { BurgerState } from '../../../store/reducers/types';
 
 
 class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
@@ -196,4 +198,11 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
 }
 
-export default withRouter(CheckoutForm);
+const mapStateToProps = (state: BurgerState) => {
+  return {
+    ingredients: state.ingredients,
+    finalPrice: state.finalPrice
+  }
+}
+
+export default connect(mapStateToProps)(withRouter(CheckoutForm));
