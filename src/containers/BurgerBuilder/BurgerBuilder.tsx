@@ -6,29 +6,7 @@ import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
-import { RouteComponentProps } from 'react-router-dom';
-
-interface BurgerBuilderState {
-  ingredients: any,
-  finalPrice: number,
-  isPurchasable: boolean,
-  modalIsOpen: boolean,
-  isLoading: boolean,
-  hasError: boolean,
-  httpErrorMsg: null | { message: string }
-}
-
-interface BurgerBuilderProps extends RouteComponentProps {
-  httpError: null | { message: string }
-}
-
-interface IngredientPriceListInterface {
-  salad: number,
-  cheese: number,
-  bacon: number,
-  meat: number,
-  [key: string]: number
-}
+import {BurgerBuilderState, BurgerBuilderProps, IngredientPriceListInterface} from './types';
 
 class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
 
