@@ -12,7 +12,9 @@ export interface BurgerBuilderState {
 }
 
 export interface BurgerBuilderProps extends RouteComponentProps {
-  httpError: null | { message: string }
+  httpError: null | { message: string },
+  ingredients: IngredientType,
+  finalPrice: number
 }
 
 export interface IngredientPriceListInterface {

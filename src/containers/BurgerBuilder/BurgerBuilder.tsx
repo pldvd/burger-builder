@@ -6,8 +6,11 @@ import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
-import {BurgerBuilderState, BurgerBuilderProps, IngredientPriceListInterface} from './types';
+import { BurgerBuilderState, BurgerBuilderProps, IngredientPriceListInterface } from './types';
 import { IngredientType } from '../../components/Burger/Burger';
+import {BurgerState} from '../../store/reducers/types';
+import { connect } from 'react-redux';
+
 
 class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
 
@@ -33,15 +36,15 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 
   componentDidMount() {
-    this.setState({isLoading: true})
+    // this.setState({ isLoading: true })
 
-    axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.json')
-      .then(response => {
-        this.setState({ ingredients: response.data, isLoading: false })
-      })
-      .catch(() => {
-        this.setState({ isLoading: false, hasError: true, httpErrorMsg: this.props.httpError });
-      })
+    // axios.get('https://react-burger-builder-8ee58.firebaseio.com/ingredients.json')
+    //   .then(response => {
+    //     this.setState({ ingredients: response.data, isLoading: false })
+    //   })
+    //   .catch(() => {
+    //     this.setState({ isLoading: false, hasError: true, httpErrorMsg: this.props.httpError });
+    //   })
   }
 
   changeAmount = (lessOrMore: string, ingredient: string) => {
@@ -113,11 +116,11 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
     if (!this.state.isLoading) {
       burger = (
         <Fragment>
-          <Burger ingredients={this.state.ingredients} />
+          <Burger ingredients={this.props.ingredients} />
           <BurgerControls
-            ingredients={this.state.ingredients}
+            ingredients={this.props.ingredients}
             changeAmount={this.changeAmount}
-            price={this.state.finalPrice}
+            price={this.props.finalPrice}
             canPurchase={this.state.isPurchasable}
             setVisibility={this.setModalVisibility} />
         </Fragment>
@@ -141,4 +144,11 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 }
 
-export default WithErrorHandler(BurgerBuilder, axios);
+const mapStateToProps = (state: BurgerState): BurgerState => {
+  return {
+    ingredients: state.ingredients,
+    finalPrice: state.finalPrice
+  }
+}
+
+export default connect(mapStateToProps)(WithErrorHandler(BurgerBuilder, axios));
