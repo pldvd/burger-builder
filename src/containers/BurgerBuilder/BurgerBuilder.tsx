@@ -44,13 +44,7 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 
   continueOrder = () => {
-    let query: string[] = [];
-
-    Object.keys(this.props.ingredients).forEach(key => {
-      query.push(key + '=' + this.props.ingredients[key]);
-    })
-
-    this.props.history.push('/checkout?' + query.join('&') + `&price=${this.props.finalPrice}`);
+    this.props.history.push('/checkout/checkout-form')
   }
 
   cancelOrder = () => {

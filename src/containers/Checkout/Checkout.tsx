@@ -3,14 +3,12 @@ import { Route } from 'react-router-dom';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
 import { RouteComponentProps } from 'react-router-dom';
-import { IngredientType } from '../../components/Burger/Burger';
+import { BurgerState } from '../../store/reducers/types'
+import { connect } from 'react-redux';
 
-class Checkout extends Component<RouteComponentProps, { ingredients: IngredientType, finalPrice: number | null }> {
+interface CheckoutProps extends BurgerState, RouteComponentProps {}
 
-  state = {
-    ingredients: {} as IngredientType,
-    finalPrice: null,
-  };
+class Checkout extends Component<CheckoutProps> {
 
   continueOrder = () => {
     this.props.history.replace('/checkout/checkout-form')
@@ -20,30 +18,21 @@ class Checkout extends Component<RouteComponentProps, { ingredients: IngredientT
     this.props.history.goBack();
   }
 
-  componentDidMount() {
-    //this is passed in search params, would be cooler to get them from redux
-    const rawQuery = new URLSearchParams(this.props.location.search);
-
-    const myIngreds: IngredientType = {
-      salad: Number(rawQuery.get('salad')),
-      cheese: Number(rawQuery.get('cheese')),
-      bacon: Number(rawQuery.get('bacon')),
-      meat: Number(rawQuery.get('meat'))
-    }
-
-    const finalPrice: number = Number(rawQuery.get('price'))
-
-    this.setState({ ingredients: { ...myIngreds }, finalPrice: finalPrice });
-  }
-
   render() {
     return (
       <div>
-        <CheckoutSummary ingredients={this.state.ingredients} cancel={this.cancelOrder} continue={this.continueOrder} />
-        <Route path={this.props.match.url + '/checkout-form'} render={() => <CheckoutForm ingredients={this.state.ingredients} finalPrice={this.state.finalPrice} />} />
+        <CheckoutSummary ingredients={this.props.ingredients} cancel={this.cancelOrder} continue={this.continueOrder} />
+        <Route path={this.props.match.url + '/checkout-form'} render={() => <CheckoutForm ingredients={this.props.ingredients} finalPrice={this.props.finalPrice} />} />
       </div>
     )
   }
 }
 
-export default Checkout;
+const mapStateToProps = (state: BurgerState) => {
+  return {
+    ingredients: state.ingredients,
+    finalPrice: state.finalPrice
+  }
+}
+
+export default connect(mapStateToProps)(Checkout);

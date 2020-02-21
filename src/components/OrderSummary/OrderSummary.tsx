@@ -2,15 +2,10 @@ import React from 'react';
 import styles from './OrderSummary.module.scss';
 import Button from '../UI/Button/Button';
 import Loader from '../UI/Loader/Loader';
+import { IngredientType } from '../Burger/Burger';
 
 interface OrderSummaryProps {
-  ingredients:{
-    salad: number,
-    cheese: number,
-    bacon: number,
-    meat: number,
-    [index: string] : number
-  },
+  ingredients: IngredientType,
   setVisibility: () => void,
   continueOrder: () => void,
   cancelOrder: () => void,
