@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
             ...state.ingredients,
             [ingred]: state.ingredients[ingred] - 1,
           },
-          finalPrice: state.finalPrice > 4 ? state.finalPrice - IngredientPriceList[ingred] : state.finalPrice,
+          finalPrice: state.finalPrice - IngredientPriceList[ingred],
         }
       } else if (lessOrMore === 'more') {
         return {

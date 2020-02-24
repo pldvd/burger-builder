@@ -18,7 +18,6 @@ class Checkout extends Component<CheckoutProps> {
     this.props.history.goBack();
   }
 
-  //maybe remove the need to pass around props.indegredients in the render method...
   render() {
     return (
       <div>
