@@ -8,7 +8,7 @@ import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 import { BurgerBuilderState, BurgerBuilderProps } from './types';
 import { BurgerState } from '../../store/types';
-import {changeAmount, cancel} from '../../store/actions/burger';
+import {changeAmount, cancel} from '../../store/actions/index';
 import { connect } from 'react-redux';
 
 
