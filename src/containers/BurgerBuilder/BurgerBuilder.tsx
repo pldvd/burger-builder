@@ -20,8 +20,6 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
     this.state = {
       isPurchasable: false,
       modalIsOpen: false,
-      isLoading: false,
-      hasError: false,
       httpErrorMsg: null
     }
   }

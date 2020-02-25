@@ -5,8 +5,6 @@ import { BurgerState } from '../../store/types';
 export interface BurgerBuilderState {
   isPurchasable: boolean,
   modalIsOpen: boolean,
-  isLoading: boolean,
-  hasError: boolean,
   httpErrorMsg: null | { message: string },
 }
 

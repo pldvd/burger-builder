@@ -1,5 +1,6 @@
 import * as actionTypes from './index';
 import { IngredientType } from '../../components/Burger/Burger';
+import axios from '../../axios';
 
 
 export const changeAmount = (lessOrMore: string, ingredient: string) => {
@@ -19,11 +20,7 @@ export const setIngredients = (ingredients:IngredientType) => {
 
 export const init = () => {
   return (dispatch: any) => {
-    setTimeout(() => dispatch(setIngredients({
-      salad: 0,
-      cheese: 0,
-      bacon: 0,
-      meat: 0
-    })), 2000)
+    axios.get('/ingredients.json')
+    .then(response => dispatch(setIngredients(response.data)))
   }
 }
