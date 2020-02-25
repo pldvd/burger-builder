@@ -1,4 +1,4 @@
-import {CHANGEAMOUNT, CANCELORDERS } from '../actions/index';
+import {INIT, CHANGEAMOUNT, CANCELORDERS } from '../actions/index';
 
 
 const initialState = {
@@ -20,6 +20,9 @@ const reducer = (state = initialState, action) => {
   }
 
   switch (action.type) {
+    case INIT:
+      console.log('hello from init REDUCER');
+      return state;
     case CHANGEAMOUNT:
       const ingred = action.ingredient;
       const lessOrMore = action.lessOrMore;

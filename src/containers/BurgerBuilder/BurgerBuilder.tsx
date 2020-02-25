@@ -8,7 +8,7 @@ import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 import { BurgerBuilderState, BurgerBuilderProps } from './types';
 import { BurgerState } from '../../store/types';
-import {changeAmount, cancel} from '../../store/actions/index';
+import {changeAmount, cancel, init} from '../../store/actions/index';
 import { connect } from 'react-redux';
 
 
@@ -24,6 +24,10 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
       hasError: false,
       httpErrorMsg: null
     }
+  }
+
+  componentDidMount() {
+    init();
   }
 
   componentDidUpdate(prevProps: BurgerBuilderProps, prevState: BurgerBuilderState) {
@@ -100,7 +104,8 @@ const mapStateToProps = (state: BurgerState): BurgerState => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     changeAmount: (lessOrMore: string,ingredient: string) => dispatch(changeAmount(lessOrMore, ingredient)),
-    cancel: () => dispatch(cancel())
+    cancel: () => dispatch(cancel()),
+    init: dispatch(init())
   }
 }
 

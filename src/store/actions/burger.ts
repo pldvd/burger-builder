@@ -7,3 +7,7 @@ export const changeAmount = (lessOrMore: string, ingredient: string) => {
 export const cancel = () => {
   return { type: actionTypes.CANCELORDERS };
 }
+
+export const init = () => {
+  return {type: actionTypes.INIT}
+}

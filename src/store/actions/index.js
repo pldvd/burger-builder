@@ -1,9 +1,11 @@
 export {
   changeAmount, 
-  cancel
+  cancel,
+  init
 } from './burger';
 
 export {
   CANCELORDERS, 
-  CHANGEAMOUNT
+  CHANGEAMOUNT,
+  INIT
 } from './actionTypes';
