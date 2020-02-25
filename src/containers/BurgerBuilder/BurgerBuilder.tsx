@@ -7,7 +7,8 @@ import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 import { BurgerBuilderState, BurgerBuilderProps } from './types';
-import { BurgerState } from '../../store/reducers/types';
+import { BurgerState } from '../../store/types';
+import {changeAmount, cancel} from '../../store/actions/burger';
 import { connect } from 'react-redux';
 
 
@@ -98,8 +99,8 @@ const mapStateToProps = (state: BurgerState): BurgerState => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    changeAmount: (lessOrMore: string, ingredient: string): BurgerState => dispatch({ type: 'CHANGEAMOUNT', ingredient, lessOrMore }),
-    cancel: () => dispatch({type:'CANCELORDERS'})
+    changeAmount: (lessOrMore: string,ingredient: string) => dispatch(changeAmount(lessOrMore, ingredient)),
+    cancel: () => dispatch(cancel())
   }
 }
 

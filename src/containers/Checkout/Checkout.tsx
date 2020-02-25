@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
 import { RouteComponentProps } from 'react-router-dom';
-import { BurgerState } from '../../store/reducers/types'
+import { BurgerState } from '../../store/types'
 import { connect } from 'react-redux';
 
 interface CheckoutProps extends BurgerState, RouteComponentProps {}

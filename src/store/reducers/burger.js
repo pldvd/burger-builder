@@ -1,3 +1,4 @@
+import * as actionTypes from '../actions/actionTypes';
 
 
 const initialState = {
@@ -19,7 +20,7 @@ const reducer = (state = initialState, action) => {
   }
 
   switch (action.type) {
-    case 'CHANGEAMOUNT':
+    case actionTypes.CHANGEAMOUNT:
       const ingred = action.ingredient;
       const lessOrMore = action.lessOrMore;
 
@@ -40,7 +41,7 @@ const reducer = (state = initialState, action) => {
           finalPrice: state.finalPrice + IngredientPriceList[ingred],
         }
       }
-    case 'CANCELORDERS':
+    case actionTypes.CANCELORDERS:
       return initialState;
     default: return state;
   }

@@ -1,6 +1,6 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { IngredientType } from '../../components/Burger/Burger';
-import { BurgerState } from '../../store/reducers/types';
+import { BurgerState } from '../../store/types';
 
 export interface BurgerBuilderState {
   isPurchasable: boolean,

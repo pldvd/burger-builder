@@ -3,7 +3,7 @@ import Burger, { BurgerProps } from '../../Burger/Burger';
 import Button from '../../UI/Button/Button';
 import styles from './CheckoutSummary.module.scss';
 import {connect} from 'react-redux';
-import { BurgerState } from '../../../store/reducers/types';
+import { BurgerState } from '../../../store/types';
 
 interface CheckoutSummaryProps extends BurgerProps {
   continue: () => void,

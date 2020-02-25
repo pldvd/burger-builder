@@ -1,0 +1,2 @@
+export const CANCELORDERS = 'CANCELORDERS';
+export const CHANGEAMOUNT = 'CHANGEAMOUNT';
