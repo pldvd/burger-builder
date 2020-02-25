@@ -2,13 +2,10 @@ import {INIT, CHANGEAMOUNT, CANCELORDERS } from '../actions/index';
 
 
 const initialState = {
-  ingredients: {
-    salad: 0,
-    cheese: 0,
-    bacon: 0,
-    meat: 0
-  },
-  finalPrice: 4
+  ingredients: {},
+  finalPrice: 4,
+  isLoading: true,
+  hasError: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -22,13 +19,18 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case INIT:
       console.log('hello from init REDUCER');
-      return state;
+      return {
+        ...state,
+        ingredients: action.ingredients,
+        isLoading: false,
+      };
     case CHANGEAMOUNT:
       const ingred = action.ingredient;
       const lessOrMore = action.lessOrMore;
 
       if (lessOrMore === 'less') {
         return {
+          ...state,
           ingredients: {
             ...state.ingredients,
             [ingred]: state.ingredients[ingred] - 1,
@@ -37,6 +39,7 @@ const reducer = (state = initialState, action) => {
         }
       } else if (lessOrMore === 'more') {
         return {
+          ...state,
           ingredients: {
             ...state.ingredients,
             [ingred]: state.ingredients[ingred] + 1,

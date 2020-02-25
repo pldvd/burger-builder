@@ -1,12 +1,14 @@
 type IngredientType = {
-  salad: number;
-  cheese: number;
-  bacon: number;
-  meat: number;
-  [index: string] : number;
+  salad: number,
+  cheese: number,
+  bacon: number,
+  meat: number,
+  [index: string] : number,
 }
 
 export interface BurgerState {
   ingredients: IngredientType,
-  finalPrice: number
+  finalPrice: number,
+  isLoading: boolean,
+  hasError: boolean,
 }

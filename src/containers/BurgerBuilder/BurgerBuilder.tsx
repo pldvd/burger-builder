@@ -61,9 +61,9 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 
   render() {
-    let burger = this.state.hasError ? <p>{`${this.state.httpErrorMsg}`}</p> : <Loader />;
+    let burger = this.props.hasError ? <p>{`${this.state.httpErrorMsg}`}</p> : <Loader />;
 
-    if (!this.state.isLoading) {
+    if (!this.props.isLoading) {
       burger = (
         <Fragment>
           <Burger ingredients={this.props.ingredients} />
@@ -79,13 +79,13 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
 
     return (
       <Fragment>
-        <Modal isOpen={this.state.modalIsOpen} isLoading={this.state.isLoading} setVisibility={this.setModalVisibility}>
+        <Modal isOpen={this.state.modalIsOpen} isLoading={this.props.isLoading} setVisibility={this.setModalVisibility}>
           <OrderSummary ingredients={this.props.ingredients}
             setVisibility={this.setModalVisibility}
             continueOrder={this.continueOrder}
             cancelOrder={this.cancelOrder}
             price={this.props.finalPrice}
-            loading={this.state.isLoading}
+            loading={this.props.isLoading}
           />
         </Modal>
         {burger}
@@ -97,7 +97,9 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
 const mapStateToProps = (state: BurgerState): BurgerState => {
   return {
     ingredients: state.ingredients,
-    finalPrice: state.finalPrice
+    finalPrice: state.finalPrice,
+    isLoading: state.isLoading,
+    hasError: state.hasError,
   }
 }
 

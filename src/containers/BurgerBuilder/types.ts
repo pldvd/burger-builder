@@ -7,15 +7,17 @@ export interface BurgerBuilderState {
   modalIsOpen: boolean,
   isLoading: boolean,
   hasError: boolean,
-  httpErrorMsg: null | { message: string }
+  httpErrorMsg: null | { message: string },
 }
 
 export interface BurgerBuilderProps extends RouteComponentProps {
   httpError: null | { message: string },
   ingredients: IngredientType,
   finalPrice: number,
-  changeAmount: () => BurgerState;
-  cancel: () => BurgerState;
+  changeAmount: () => BurgerState,
+  cancel: () => BurgerState,
+  isLoading: boolean,
+  hasError: boolean,
 }
 
 export interface IngredientPriceListInterface {
