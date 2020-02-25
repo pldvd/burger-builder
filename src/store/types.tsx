@@ -11,4 +11,5 @@ export interface BurgerState {
   finalPrice: number,
   isLoading: boolean,
   hasError: boolean,
+  errorMsg: string,
 }

@@ -1,11 +1,13 @@
 export {
   changeAmount, 
   cancel,
-  init
+  init,
+  failedToDownload
 } from './burger';
 
 export {
   CANCELORDERS, 
   CHANGEAMOUNT,
-  INIT
+  INIT,
+  DOWNLOADFAILED
 } from './actionTypes';

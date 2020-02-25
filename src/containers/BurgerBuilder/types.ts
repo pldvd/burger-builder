@@ -5,7 +5,6 @@ import { BurgerState } from '../../store/types';
 export interface BurgerBuilderState {
   isPurchasable: boolean,
   modalIsOpen: boolean,
-  httpErrorMsg: null | { message: string },
 }
 
 export interface BurgerBuilderProps extends RouteComponentProps {
@@ -16,6 +15,8 @@ export interface BurgerBuilderProps extends RouteComponentProps {
   cancel: () => BurgerState,
   isLoading: boolean,
   hasError: boolean,
+  errorMsg: string,
+  init: () => BurgerState
 }
 
 export interface IngredientPriceListInterface {

@@ -8,7 +8,7 @@ import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 import { BurgerBuilderState, BurgerBuilderProps } from './types';
 import { BurgerState } from '../../store/types';
-import {changeAmount, cancel, init} from '../../store/actions/index';
+import { changeAmount, cancel, init } from '../../store/actions/index';
 import { connect } from 'react-redux';
 
 
@@ -20,12 +20,11 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
     this.state = {
       isPurchasable: false,
       modalIsOpen: false,
-      httpErrorMsg: null
     }
   }
 
   componentDidMount() {
-    init();
+    this.props.init();
   }
 
   componentDidUpdate(prevProps: BurgerBuilderProps, prevState: BurgerBuilderState) {
@@ -59,7 +58,7 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 
   render() {
-    let burger = this.props.hasError ? <p>{`${this.state.httpErrorMsg}`}</p> : <Loader />;
+    let burger = this.props.hasError ? <p>{`${this.props.errorMsg}`}</p> : <Loader />;
 
     if (!this.props.isLoading) {
       burger = (
@@ -98,14 +97,15 @@ const mapStateToProps = (state: BurgerState): BurgerState => {
     finalPrice: state.finalPrice,
     isLoading: state.isLoading,
     hasError: state.hasError,
+    errorMsg: state.errorMsg
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    changeAmount: (lessOrMore: string,ingredient: string) => dispatch(changeAmount(lessOrMore, ingredient)),
+    changeAmount: (lessOrMore: string, ingredient: string) => dispatch(changeAmount(lessOrMore, ingredient)),
     cancel: () => dispatch(cancel()),
-    init: dispatch(init())
+    init: () => dispatch(init())
   }
 }
 

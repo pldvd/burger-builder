@@ -18,9 +18,17 @@ export const setIngredients = (ingredients:IngredientType) => {
   }
 }
 
+export const failedToDownload = (msg: string ) => {
+  return {
+    type: actionTypes.DOWNLOADFAILED,
+    errorMsg: msg,
+  }
+}
+
 export const init = () => {
   return (dispatch: any) => {
     axios.get('/ingredients.json')
     .then(response => dispatch(setIngredients(response.data)))
+    .catch(err => dispatch(failedToDownload(err.message)))
   }
 }

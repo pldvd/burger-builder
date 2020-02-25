@@ -1,4 +1,4 @@
-import {INIT, CHANGEAMOUNT, CANCELORDERS } from '../actions/index';
+import {INIT, CHANGEAMOUNT, CANCELORDERS, DOWNLOADFAILED } from '../actions/index';
 
 
 const initialState = {
@@ -6,6 +6,7 @@ const initialState = {
   finalPrice: 4,
   isLoading: true,
   hasError: false,
+  errorMsg: null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         ingredients: action.ingredients,
         isLoading: false,
+      };
+    case DOWNLOADFAILED:
+      return {
+          ...state,
+          hasError:true,
+          errorMsg: action.errorMsg
       };
     case CHANGEAMOUNT:
       const ingred = action.ingredient;
