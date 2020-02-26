@@ -22,7 +22,6 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
   handleSend = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(this.props.finalPrice, this.props.ingredients);
 
     this.setState({
       isLoading: true,
