@@ -1,8 +1,13 @@
-import {INIT, CHANGEAMOUNT, CANCELORDERS, DOWNLOADFAILED } from '../actions/index';
+import { INIT, CHANGEAMOUNT, CANCELORDERS, DOWNLOADFAILED } from '../actions/index';
 
 
 const initialState = {
-  ingredients: {},
+  ingredients: {
+    salad: 0,
+    cheese: 0,
+    bacon: 0,
+    meat: 0
+  },
   finalPrice: 4,
   isLoading: true,
   hasError: false,
@@ -19,7 +24,6 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case INIT:
-      console.log('hello from init REDUCER');
       return {
         ...state,
         ingredients: {
@@ -32,9 +36,9 @@ const reducer = (state = initialState, action) => {
       };
     case DOWNLOADFAILED:
       return {
-          ...state,
-          hasError:true,
-          errorMsg: action.errorMsg
+        ...state,
+        hasError: true,
+        errorMsg: action.errorMsg
       };
     case CHANGEAMOUNT:
       const ingred = action.ingredient;
@@ -60,7 +64,10 @@ const reducer = (state = initialState, action) => {
         }
       }
     case CANCELORDERS:
-      return initialState;
+      return {
+        ...initialState,
+        isLoading: false
+      };
     default: return state;
   }
 }

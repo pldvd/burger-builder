@@ -18,6 +18,21 @@ export interface orderDataInterface {
   [i: string]: string | boolean
 }
 
+export interface orderInterface {
+  name: string,
+  email: string,
+  emailIsValid: boolean,
+  street: string,
+  streetIsValid: boolean,
+  postalCode: string,
+  postalCodeIsValid: boolean,
+  country: string,
+  countryIsValid: boolean,
+  deliveryMethod: string,
+  deliveryMethodIsValid: boolean,
+  [i: string]: string | boolean
+}
+
 export interface CheckoutFormInterface {
   orderData: orderDataInterface,
   isLoading: boolean,
@@ -29,5 +44,8 @@ export interface CheckoutFormInterface {
 
 export interface CheckoutFormProps extends RouteComponentProps {
   ingredients: IngredientType,
-  finalPrice: number | null
+  finalPrice: number | null,
+  isLoading: boolean,
+  placeOrder: (order: any) => any,
+  orderStartLoading: () => any,
 }

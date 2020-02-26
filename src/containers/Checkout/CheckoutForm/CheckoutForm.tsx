@@ -8,6 +8,7 @@ import Axios from '../../../axios';
 import { orderDataInterface, CheckoutFormInterface, CheckoutFormProps } from './types';
 import { connect } from 'react-redux';
 import { BurgerState } from '../../../store/types';
+import { orderStartLoading, placeOrder } from '../../../store/actions/order';
 
 
 class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
@@ -23,9 +24,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
   handleSend = (e: React.FormEvent) => {
     e.preventDefault();
 
-    this.setState({
-      isLoading: true,
-    })
+    this.props.orderStartLoading();
 
     const order = {
       ingredients: this.props.ingredients,
@@ -42,23 +41,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       }
     }
 
-    Axios.post('/orders.json', order)
-      .then(response => {
-        console.log(response);
-        this.setState({
-          isLoading: false,
-        });
-        //missing a "success" UI message here
-        this.props.history.push('/');
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({
-          isLoading: false,
-        });
-        //missing an error UI message here
-        this.props.history.push('/');
-      });
+    this.props.placeOrder(order);
   }
 
   validateInput = (input: string, validationRule: RegExp): boolean => {
@@ -184,7 +167,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       </div>
     );
 
-    if (this.state.isLoading) {
+    if (this.props.isLoading) {
       form = (
         <div className={styles.CheckoutForm}>
           <Loader />
@@ -200,8 +183,16 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 const mapStateToProps = (state: any) => {
   return {
     ingredients: state.burger.ingredients,
-    finalPrice: state.burger.finalPrice
+    finalPrice: state.burger.finalPrice,
+    isLoading: state.order.isLoading
   }
 }
 
-export default connect(mapStateToProps)(withRouter(CheckoutForm));
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    orderStartLoading: () => dispatch(orderStartLoading()),
+    placeOrder: (order: any) => dispatch(placeOrder(order)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CheckoutForm));

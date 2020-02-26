@@ -2,8 +2,9 @@ import React from 'react';
 import Burger, { BurgerProps } from '../../Burger/Burger';
 import Button from '../../UI/Button/Button';
 import styles from './CheckoutSummary.module.scss';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { BurgerState } from '../../../store/types';
+import { cancel } from '../../../store/actions/index';
 
 interface CheckoutSummaryProps extends BurgerProps {
   continue: () => void,
@@ -33,4 +34,10 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-export default connect(mapStateToProps)(CheckoutSummary);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    cancel: () => dispatch(cancel)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutSummary);
