@@ -11,6 +11,7 @@ export {
 } from './order';
 
 export {
+  STARTLOADING,
   CANCELORDERS, 
   CHANGEAMOUNT,
   INIT,

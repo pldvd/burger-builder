@@ -1,4 +1,4 @@
-import { INIT, CHANGEAMOUNT, CANCELORDERS, DOWNLOADFAILED } from '../actions/index';
+import { STARTLOADING, INIT, CHANGEAMOUNT, CANCELORDERS, DOWNLOADFAILED } from '../actions/index';
 
 
 const initialState = {
@@ -33,6 +33,7 @@ const reducer = (state = initialState, action) => {
           meat: action.ingredients.meat
         },
         isLoading: false,
+        finalPrice: initialState.finalPrice
       };
     case DOWNLOADFAILED:
       return {
@@ -66,7 +67,7 @@ const reducer = (state = initialState, action) => {
     case CANCELORDERS:
       return {
         ...initialState,
-        isLoading: false
+        isLoading: false,
       };
     default: return state;
   }
