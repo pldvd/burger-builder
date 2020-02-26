@@ -91,13 +91,13 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 }
 
-const mapStateToProps = (state: BurgerState): BurgerState => {
+const mapStateToProps = (state: any) => {
   return {
-    ingredients: state.ingredients,
-    finalPrice: state.finalPrice,
-    isLoading: state.isLoading,
-    hasError: state.hasError,
-    errorMsg: state.errorMsg
+    ingredients: state.burger.ingredients,
+    finalPrice: state.burger.finalPrice,
+    isLoading: state.burger.isLoading,
+    hasError: state.burger.hasError,
+    errorMsg: state.burger.errorMsg
   }
 }
 

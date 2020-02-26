@@ -27,9 +27,9 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = (props) => {
   )
 }
 
-const mapStateToProps = (state: BurgerState) => {
+const mapStateToProps = (state: any) => {
   return {
-    ingredients: state.ingredients
+    ingredients: state.burger.ingredients
   }
 }
 

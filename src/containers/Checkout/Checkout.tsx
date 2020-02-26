@@ -28,9 +28,9 @@ class Checkout extends Component<CheckoutProps> {
   }
 }
 
-const mapStateToProps = (state: BurgerState) => {
+const mapStateToProps = (state: any) => {
   return {
-    ingredients: state.ingredients,
+    ingredients: state.burger.ingredients,
   }
 }
 

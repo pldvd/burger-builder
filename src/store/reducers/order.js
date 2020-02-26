@@ -1,6 +1,6 @@
 const initialState = {
   orders: [], // {order: orderData, id: response.data.name}
-  isLoading: false, 
+  isLoading: false,
 }
 
 const reducer = (state = initialState, action) => {

@@ -197,10 +197,10 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
 
 }
 
-const mapStateToProps = (state: BurgerState) => {
+const mapStateToProps = (state: any) => {
   return {
-    ingredients: state.ingredients,
-    finalPrice: state.finalPrice
+    ingredients: state.burger.ingredients,
+    finalPrice: state.burger.finalPrice
   }
 }
 
