@@ -17,11 +17,14 @@ class Checkout extends Component<CheckoutProps> {
     this.props.history.replace('/checkout/checkout-form')
   }
 
-  // cancelOrder = () => {
-  //   this.props.history.goBack();
-  // }
-
   render() {
+    //needed in case a user just navigates to url without selecting ingredients first
+    const isTheBurgerEmpty = (ingredients: IngredientType) => {
+      const ingredientValues = Object.values(ingredients).every(ing => !ing);
+      return ingredientValues;
+    }
+
+
     let summary = (
       <div>
         <CheckoutSummary continue={this.continueOrder} />
@@ -29,22 +32,8 @@ class Checkout extends Component<CheckoutProps> {
       </div>
     );
 
-    const isTheBurgerEmpty = (ingredients: IngredientType) => {
-      const ingredientValues = Object.values(ingredients).every(ing => !ing)
-      return ingredientValues;
-    }
-
-    // console.log(isTheBurgerEmpty(this.props.ingredients));
-
     (this.props.isPurchased || isTheBurgerEmpty(this.props.ingredients)) && (summary = <Redirect to='/' />);
-
     return summary;
-    // (
-    //   <div>
-    //     <CheckoutSummary cancel={this.cancelOrder} continue={this.continueOrder} />
-    //     <Route path={this.props.match.url + '/checkout-form'} component={CheckoutForm} />
-    //   </div>
-    // )
   }
 }
 

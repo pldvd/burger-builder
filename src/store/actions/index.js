@@ -3,15 +3,14 @@ export {
   cancel,
   init,
   failedToDownload
-} from './burger';
+} from './burger-actions';
 
 export {
   orderStartLoading,
   placeOrder
-} from './order';
+} from './order-actions';
 
 export {
-  STARTLOADING,
   CANCELORDERS, 
   CHANGEAMOUNT,
   INIT,

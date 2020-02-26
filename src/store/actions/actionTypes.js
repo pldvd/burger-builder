@@ -1,5 +1,4 @@
 //burger action types
-export const STARTLOADING = 'STARTLOADING';
 export const CANCELORDERS = 'CANCELORDERS';
 export const CHANGEAMOUNT = 'CHANGEAMOUNT';
 export const INIT = 'INIT';

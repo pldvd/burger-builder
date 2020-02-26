@@ -5,8 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import burgerReducer from './store/reducers/burger';
-import orderReducer from './store/reducers/order';
+import burgerReducer from './store/reducers/burger-reducer';
+import orderReducer from './store/reducers/order-reducer';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({

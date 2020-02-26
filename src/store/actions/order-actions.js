@@ -22,12 +22,11 @@ const orderFailed = (errorMsg) => {
   }
 }
 
-export const placeOrder = (order) => {
+export const placeOrder = (order, clearFunc) => {
   return dispatch => {
-      axios.post('/orders.json', order)
-        .then(response => dispatch(orderSuccess(order, response.data.name)))
-        .catch(error => dispatch(orderFailed(error.msg)))
+    axios.post('/orders.json', order)
+      .then(response => dispatch(orderSuccess(order, response.data.name)))
+      .catch(error => dispatch(orderFailed(error.msg)))
     //missing an error UI message here
-    // this.props.history.push('/');
   }
 }

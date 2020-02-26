@@ -1,11 +1,11 @@
-import { STARTLOADING, INIT, CHANGEAMOUNT, CANCELORDERS, DOWNLOADFAILED } from '../actions/index';
+import { INIT, CHANGEAMOUNT, CANCELORDERS, DOWNLOADFAILED } from '../actions/index';
 
 
 const initialState = {
   ingredients: {
     salad: 0,
-    cheese: 0,
     bacon: 0,
+    cheese: 0,
     meat: 0
   },
   finalPrice: 4,
@@ -17,8 +17,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   const IngredientPriceList = {
     salad: .5,
-    cheese: 1,
     bacon: 1,
+    cheese: 1,
     meat: 2,
   }
 

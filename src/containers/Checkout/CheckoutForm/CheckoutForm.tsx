@@ -8,7 +8,7 @@ import Axios from '../../../axios';
 import { orderDataInterface, CheckoutFormInterface, CheckoutFormProps } from './types';
 import { connect } from 'react-redux';
 import { BurgerState } from '../../../store/types';
-import { orderStartLoading, placeOrder } from '../../../store/actions/order';
+import { orderStartLoading, placeOrder } from '../../../store/actions/order-actions';
 
 
 class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {

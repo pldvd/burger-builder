@@ -24,6 +24,7 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 
   componentDidMount() {
+    this.props.cancel(); //clear orders at every DidMount
     this.props.init();
   }
 
