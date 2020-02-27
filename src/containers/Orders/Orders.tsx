@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import OrderCell from '../../components/Order/OrderCell/OrderCell';
 import { OrdersInterface } from './types';
 import { connect } from 'react-redux';
-import { fetchOrders } from '../../store/actions/index'
-import { orderDataInterface } from '../Checkout/CheckoutForm/types';
+import { fetchOrders } from '../../store/actions/index';
+import WithErrorHandler from '../../hoc/WithErrorHandler';
+import axios from '../../axios';
+// import { orderDataInterface } from '../Checkout/CheckoutForm/types';
 
 class Orders extends Component<{ orders: OrdersInterface[], fetchOrdersFromServer: () => any }> {
 
@@ -34,4 +36,4 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler(Orders, axios));

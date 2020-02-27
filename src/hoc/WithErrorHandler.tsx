@@ -49,19 +49,6 @@ const WithErrorHandler = (WrappedComponent: typeof React.Component, axios: Axios
       color: "red"
     }
 
-    // componentDidMount() {
-
-    //   axios.interceptors.request.use(request => {
-    //     this.setState({ error: null });
-    //     return request;
-    //   })
-
-
-    //   axios.interceptors.response.use(response => response, error => {
-    //     this.setState({ error: error });
-    //   })
-    // }
-
     render() {
       return (
         <Fragment>
