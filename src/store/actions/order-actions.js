@@ -30,3 +30,47 @@ export const placeOrder = (order, clearFunc) => {
     //missing an error UI message here
   }
 }
+
+const fetchSuccess = (orders) => {
+  return {
+    type: actionTypes.FETCHSUCCEEDED,
+    orders
+  }
+}
+
+const fetchFail = (error) => {
+  return {
+    type: actionTypes.FETCHFAILED,
+    error
+  }
+}
+
+const fetchStart = () => {
+  return {
+    type: actionTypes.FETCHSTART
+  }
+}
+
+export const fetchOrders = () => {
+  return dispatch => {
+    dispatch(fetchStart());
+
+    axios.get('/orders.json')
+      .then(response => {
+        const fetchedOrders = [];
+
+        for (let key in response.data) {
+          //saving only the key, the ingredients and the price (not the customer info also coming back)
+          const { ingredients, price } = response.data[key];
+          fetchedOrders.push({
+            ingredients,
+            price,
+            id: key
+          });
+        }
+        return fetchedOrders;
+      })
+      .then((fetchedOrders) => dispatch(fetchSuccess(fetchedOrders)))
+      .catch(err => dispatch(fetchFail(err)))
+  }
+}

@@ -1,5 +1,5 @@
 export {
-  changeAmount, 
+  changeAmount,
   cancel,
   init,
   failedToDownload
@@ -7,12 +7,17 @@ export {
 
 export {
   orderStartLoading,
-  placeOrder
+  placeOrder,
+  fetchOrders
 } from './order-actions';
 
 export {
-  CANCELORDERS, 
+  CANCELORDERS,
   CHANGEAMOUNT,
   INIT,
-  DOWNLOADFAILED
+  DOWNLOADFAILED,
+  FETCHORDER,
+  FETCHSTART,
+  FETCHSUCCEEDED,
+  FETCHFAILED
 } from './actionTypes';

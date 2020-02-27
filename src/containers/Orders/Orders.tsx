@@ -1,37 +1,19 @@
 import React, { Component } from 'react';
 import OrderCell from '../../components/Order/OrderCell/OrderCell';
-import Axios from '../../axios';
-import {OrdersInterface} from './types';
+import { OrdersInterface } from './types';
+import { connect } from 'react-redux';
+import { fetchOrders } from '../../store/actions/index'
+import { orderDataInterface } from '../Checkout/CheckoutForm/types';
 
-class Orders extends Component<{}, { orders: OrdersInterface[] }> {
+class Orders extends Component<{ orders: OrdersInterface[], fetchOrdersFromServer: () => any }> {
 
-  state = {
-    orders: [],
-  }
 
   componentDidMount() {
-
-    const orders: OrdersInterface[] = [];
-
-    Axios.get('/orders.json')
-      .then(response => {
-        for (let key in response.data) {
-          //saving only the key, the ingredients and the price (not the customer info also coming back)
-          const { ingredients, price } = response.data[key];
-          orders.push({
-            ingredients,
-            price,
-            id: key
-          });
-        }
-      })
-      .then(() => {
-        this.setState({ orders: orders })
-      });
+    this.props.fetchOrdersFromServer();
   }
 
   render() {
-    const allOrders = this.state.orders.map(order => {
+    const allOrders = this.props.orders.map(order => {
       const { price, id, ingredients } = order;
       return <OrderCell price={price} ingredients={ingredients} id={id} key={id} />
     });
@@ -40,4 +22,16 @@ class Orders extends Component<{}, { orders: OrdersInterface[] }> {
   }
 }
 
-export default Orders;
+const mapStateToProps = (state: any) => {
+  return {
+    orders: state.order.orders
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    fetchOrdersFromServer: () => dispatch(fetchOrders())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
