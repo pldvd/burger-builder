@@ -32,19 +32,16 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
         break;
       case 'password':
         name = e.target.name;
-        nameIsValid = this.validateInput(currentValue, /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/); //minimum 6 characters, one letter and one number
+        nameIsValid = this.validateInput(currentValue, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/); //minimum 6 characters, one lowercase letter, one uppercase letter and one number
         break;
     }
 
     const stateCopy = { ...this.state };
+    stateCopy.formIsTouched = true;
     stateCopy[name] = currentValue;
     stateCopy[`${name}IsValid`] = nameIsValid;
     const touchedFieldsCopy = [...this.state.touchedFields].concat(e.target.name);
     stateCopy.touchedFields = touchedFieldsCopy;
-
-    if (!this.state.formIsTouched) {
-      this.setState({ formIsTouched: true });
-    }
 
     const isFormValid = (state: AuthStateInterface): boolean => {
       return (state.formIsTouched && state.emailIsValid && state.passwordIsValid)
@@ -55,10 +52,15 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
     });
   }
 
+  handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('csumi');
+  }
+
   render() {
 
     return (
-      <form onSubmit={() => console.log('csumi')}>
+      <form onSubmit={this.handleSubmit}>
         <Input
           inputtype="email"
           type="email"
