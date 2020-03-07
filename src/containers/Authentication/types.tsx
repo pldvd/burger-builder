@@ -10,4 +10,6 @@ export interface AuthStateInterface {
   [key: string]: string | boolean | string[]
 }
 
-export interface AuthProps {}
+export interface AuthProps {
+  authenticate: (email: string, password: string) => void
+}

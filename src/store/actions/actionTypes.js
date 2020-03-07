@@ -16,3 +16,8 @@ export const FETCHORDER = 'FETCHORDERS';
 export const FETCHSTART = 'FETCHSTART';
 export const FETCHSUCCEEDED = 'FETCHSUCCEEDED';
 export const FETCHFAILED = 'FETCHFAILED';
+
+//authentication - action types
+export const AUTH_START = 'AUTH_START';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';

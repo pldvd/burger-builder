@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import { AuthProps, AuthStateInterface } from './types';
+import { connect } from 'react-redux';
+import { auth } from '../../store/actions/auth-actions';
 
 class Authentication extends Component<AuthProps, AuthStateInterface> {
 
@@ -55,6 +57,7 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('csumi');
+    this.props.authenticate(this.state.email, this.state.password);
   }
 
   render() {
@@ -87,4 +90,10 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
   }
 }
 
-export default Authentication;
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    authenticate: (email: string, pass: string) => dispatch(auth(email, pass)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Authentication);
