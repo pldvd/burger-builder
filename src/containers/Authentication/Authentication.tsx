@@ -3,7 +3,7 @@ import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import { AuthProps, AuthStateInterface } from './types';
 import { connect } from 'react-redux';
-import { auth } from '../../store/actions/auth-actions';
+import { auth } from '../../store/actions'; //since we are importing from a file there named index.js, no need to further specify path
 
 class Authentication extends Component<AuthProps, AuthStateInterface> {
 

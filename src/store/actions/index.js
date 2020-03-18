@@ -24,3 +24,7 @@ export {
   AUTH_SUCCESS,
   AUTH_FAIL
 } from './actionTypes';
+
+export {
+  auth
+} from './auth-actions';
