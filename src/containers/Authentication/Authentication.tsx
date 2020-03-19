@@ -4,6 +4,7 @@ import Input from '../../components/UI/Input/Input';
 import { AuthProps, AuthStateInterface } from './types';
 import { connect } from 'react-redux';
 import { auth } from '../../store/actions'; //since we are importing from a file there named index.js, no need to further specify path
+import styles from './Authentication.module.scss';
 
 class Authentication extends Component<AuthProps, AuthStateInterface> {
 
@@ -63,29 +64,34 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
   render() {
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input
-          inputtype="email"
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Enter your email."
-          onChange={this.handleInputChange}
-          isValid={this.state.emailIsValid}
-          touchedFields={this.state.touchedFields}
-        />
-        <Input
-          inputtype="password"
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Enter your password."
-          onChange={this.handleInputChange}
-          isValid={this.state.emailIsValid}
-          touchedFields={this.state.touchedFields}
-        />
-        <Button color={'green'} isDisabled={!this.state.formIsValid}>Send</Button>
-      </form>
+      <div className={styles.Authentication}>
+        <form onSubmit={this.handleSubmit}>
+          <Input
+            inputtype="email"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email."
+            onChange={this.handleInputChange}
+            isValid={this.state.emailIsValid}
+            touchedFields={this.state.touchedFields}
+          />
+          <Input
+            inputtype="password"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter your password."
+            onChange={this.handleInputChange}
+            isValid={this.state.emailIsValid}
+            touchedFields={this.state.touchedFields}
+          />
+          <Button color={'green'} isDisabled={!this.state.formIsValid}>Sign-up</Button>
+          <div>
+            <p>If you already have an account, switch to <span className={styles.signIn}> sign-in here!</span></p>
+          </div>
+        </form>
+      </div>
     )
   }
 }

@@ -1,0 +1,16 @@
+.Authentication {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    padding: 5rem;
+    max-width: 500px;
+    height: 50vh;
+  }
+}
+
+.signIn {
+  cursor: pointer;
+  text-decoration: underline;
+}
