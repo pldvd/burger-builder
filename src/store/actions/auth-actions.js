@@ -21,12 +21,14 @@ export const authFail = error => {
   }
 }
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignedUp) => {
+  const authVariable = isSignedUp ? 'signInWithPassword' : 'signUp';
+
   return dispatch => {
     dispatch(authStart())
     axios({
       method: 'post',
-      url: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_KEY}`,
+      url: `https://identitytoolkit.googleapis.com/v1/accounts:${authVariable}?key=${process.env.REACT_APP_KEY}`,
       data: {
         email,
         password,

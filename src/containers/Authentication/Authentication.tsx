@@ -59,7 +59,7 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('csumi');
-    this.props.authenticate(this.state.email, this.state.password);
+    this.props.authenticate(this.state.email, this.state.password, this.state.isSignedUp);
   }
 
   switchToSignIn = () => {
@@ -107,7 +107,7 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    authenticate: (email: string, pass: string) => dispatch(auth(email, pass)),
+    authenticate: (email: string, pass: string, isSignedUp: boolean) => dispatch(auth(email, pass, isSignedUp)),
   }
 }
 
