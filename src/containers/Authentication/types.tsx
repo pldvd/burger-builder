@@ -7,6 +7,7 @@ export interface AuthStateInterface {
   email: string,
   passwordIsValid: boolean,
   emailIsValid: boolean,
+  isSignedUp: boolean,
   [key: string]: string | boolean | string[]
 }
 

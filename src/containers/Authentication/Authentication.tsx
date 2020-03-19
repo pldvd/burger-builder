@@ -16,7 +16,8 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
     password: '',
     email: '',
     passwordIsValid: false,
-    emailIsValid: false
+    emailIsValid: false,
+    isSignedUp: false
   };
 
   validateInput = (input: string, validationRule: RegExp): boolean => {
@@ -61,6 +62,10 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
     this.props.authenticate(this.state.email, this.state.password);
   }
 
+  switchToSignIn = () => {
+    this.setState({ isSignedUp: true });
+  }
+
   render() {
 
     return (
@@ -86,9 +91,13 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
             isValid={this.state.emailIsValid}
             touchedFields={this.state.touchedFields}
           />
-          <Button color={'green'} isDisabled={!this.state.formIsValid}>Sign-up</Button>
+          <Button color={'green'} isDisabled={!this.state.formIsValid}>
+            {this.state.isSignedUp ? "Sign-in" : "Sign-up"}
+          </Button>
           <div>
-            <p>If you already have an account, switch to <span className={styles.signIn}> sign-in here!</span></p>
+            <p>If you already have an account, switch to
+              <span className={styles.signIn} onClick={this.switchToSignIn}> sign-in here!</span>
+            </p>
           </div>
         </form>
       </div>
