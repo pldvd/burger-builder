@@ -107,6 +107,9 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
 
     return (
       <div className={styles.Authentication}>
+        <p>
+          {this.props.error ? this.props.error.message : null}
+        </p>
         {form}
       </div>
     )
@@ -115,7 +118,8 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
 
 const mapStateToProps = (state: any) => {
   return {
-    isLoading: state.auth.isLoading
+    isLoading: state.auth.isLoading,
+    error: state.auth.error
   }
 }
 
