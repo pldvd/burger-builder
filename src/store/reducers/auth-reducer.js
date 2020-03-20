@@ -24,7 +24,7 @@ const authReducer = (state = initialState, action) => {
     case AUTH_FAIL:
       return {
         ...state,
-        error: action.authData.error,
+        error: action.error.message,
         loading: false
       }
     default:
