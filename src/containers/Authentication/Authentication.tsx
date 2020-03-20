@@ -107,7 +107,7 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
 
     return (
       <div className={styles.Authentication}>
-        <p>
+        <p className={styles.error}>
           {this.props.error ? this.props.error.message : null}
         </p>
         {form}
