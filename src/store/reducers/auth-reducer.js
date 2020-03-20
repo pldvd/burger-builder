@@ -18,7 +18,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.authData.idToken,
-        userId: action.authData.userId,
+        userId: action.authData.localId,
         loading: false
       }
     case AUTH_FAIL:
