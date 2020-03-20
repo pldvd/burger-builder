@@ -7,11 +7,13 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import burgerReducer from './store/reducers/burger-reducer';
 import orderReducer from './store/reducers/order-reducer';
+import authReducer from './store/reducers/auth-reducer';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
   burger: burgerReducer,
-  order: orderReducer
+  order: orderReducer,
+  auth: authReducer
 });
 
 
