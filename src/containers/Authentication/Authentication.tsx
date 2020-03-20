@@ -5,6 +5,7 @@ import { AuthProps, AuthStateInterface } from './types';
 import { connect } from 'react-redux';
 import { auth } from '../../store/actions'; //since we are importing from a file there named index.js, no need to further specify path
 import styles from './Authentication.module.scss';
+import Spinner from '../../components/UI/Loader/Loader';
 
 class Authentication extends Component<AuthProps, AuthStateInterface> {
 
@@ -67,41 +68,54 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
   }
 
   render() {
+    let form = (
+      <form onSubmit={this.handleSubmit}>
+        <Input
+          inputtype="email"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter your email."
+          onChange={this.handleInputChange}
+          isValid={this.state.emailIsValid}
+          touchedFields={this.state.touchedFields}
+        />
+        <Input
+          inputtype="password"
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Enter your password."
+          onChange={this.handleInputChange}
+          isValid={this.state.emailIsValid}
+          touchedFields={this.state.touchedFields}
+        />
+        <Button color={'green'} isDisabled={!this.state.formIsValid}>
+          {this.state.isSignedUp ? "Sign-in" : "Sign-up"}
+        </Button>
+        <div>
+          <p>If you already have an account, switch to
+        <span className={styles.signIn} onClick={this.switchToSignIn}> sign-in here!</span>
+          </p>
+        </div>
+      </form>
+    )
+
+    if (this.props.isLoading) {
+      form = <Spinner />
+    }
 
     return (
       <div className={styles.Authentication}>
-        <form onSubmit={this.handleSubmit}>
-          <Input
-            inputtype="email"
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your email."
-            onChange={this.handleInputChange}
-            isValid={this.state.emailIsValid}
-            touchedFields={this.state.touchedFields}
-          />
-          <Input
-            inputtype="password"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password."
-            onChange={this.handleInputChange}
-            isValid={this.state.emailIsValid}
-            touchedFields={this.state.touchedFields}
-          />
-          <Button color={'green'} isDisabled={!this.state.formIsValid}>
-            {this.state.isSignedUp ? "Sign-in" : "Sign-up"}
-          </Button>
-          <div>
-            <p>If you already have an account, switch to
-              <span className={styles.signIn} onClick={this.switchToSignIn}> sign-in here!</span>
-            </p>
-          </div>
-        </form>
+        {form}
       </div>
     )
+  }
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+    isLoading: state.auth.isLoading
   }
 }
 
@@ -111,4 +125,4 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Authentication);
+export default connect(mapStateToProps, mapDispatchToProps)(Authentication);

@@ -12,5 +12,6 @@ export interface AuthStateInterface {
 }
 
 export interface AuthProps {
-  authenticate: (email: string, password: string, isSignedUp: boolean) => void
+  authenticate: (email: string, password: string, isSignedUp: boolean) => void,
+  isLoading: boolean
 }
