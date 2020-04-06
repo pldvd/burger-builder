@@ -41,7 +41,7 @@ class CheckoutForm extends Component<CheckoutFormProps, CheckoutFormInterface> {
       }
     }
 
-    this.props.placeOrder(order);
+    this.props.placeOrder(order, this.props.token);
   }
 
   validateInput = (input: string, validationRule: RegExp): boolean => {
@@ -184,14 +184,15 @@ const mapStateToProps = (state: any) => {
   return {
     ingredients: state.burger.ingredients,
     finalPrice: state.burger.finalPrice,
-    isLoading: state.order.isLoading
+    isLoading: state.order.isLoading,
+    token: state.auth.token
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     orderStartLoading: () => dispatch(orderStartLoading()),
-    placeOrder: (order: any) => dispatch(placeOrder(order)),
+    placeOrder: (order: any, token: string) => dispatch(placeOrder(order, token)),
   }
 }
 

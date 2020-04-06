@@ -22,9 +22,9 @@ const orderFailed = (errorMsg) => {
   }
 }
 
-export const placeOrder = (order, clearFunc) => {
+export const placeOrder = (order, token) => {
   return dispatch => {
-    axios.post('/orders.json', order)
+    axios.post('/orders.json?auth=' + token, order)
       .then(response => dispatch(orderSuccess(order, response.data.name)))
       .catch(error => dispatch(orderFailed(error.msg)))
     //missing an error UI message here

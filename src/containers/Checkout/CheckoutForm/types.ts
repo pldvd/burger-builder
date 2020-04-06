@@ -46,6 +46,7 @@ export interface CheckoutFormProps extends RouteComponentProps {
   ingredients: IngredientType,
   finalPrice: number | null,
   isLoading: boolean,
-  placeOrder: (order: any) => any,
+  placeOrder: (order: any, token: string) => any,
   orderStartLoading: () => any,
+  token: string 
 }
