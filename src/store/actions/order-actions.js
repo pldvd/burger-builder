@@ -51,11 +51,11 @@ const fetchStart = () => {
   }
 }
 
-export const fetchOrders = () => {
+export const fetchOrders = (token) => {
   return dispatch => {
     dispatch(fetchStart());
 
-    axios.get('/orders.json')
+    axios.get('/orders.json?auth=' + token)
       .then(response => {
         const fetchedOrders = [];
 

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import OrderCell from '../../components/Order/OrderCell/OrderCell';
-import { OrdersInterface } from './types';
+import { OrdersProps } from './types';
 import { connect } from 'react-redux';
 import { fetchOrders } from '../../store/actions/index';
 import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 // import { orderDataInterface } from '../Checkout/CheckoutForm/types';
 
-class Orders extends Component<{ orders: OrdersInterface[], fetchOrdersFromServer: () => any }> {
+class Orders extends Component<{ orders: OrdersProps[], fetchOrdersFromServer: (token: string) => any, token: string }> {
 
 
   componentDidMount() {
-    this.props.fetchOrdersFromServer();
+    this.props.fetchOrdersFromServer(this.props.token);
   }
 
   render() {
@@ -26,13 +26,14 @@ class Orders extends Component<{ orders: OrdersInterface[], fetchOrdersFromServe
 
 const mapStateToProps = (state: any) => {
   return {
-    orders: state.order.orders
+    orders: state.order.orders,
+    token: state.auth.token
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    fetchOrdersFromServer: () => dispatch(fetchOrders())
+    fetchOrdersFromServer: (token: string) => dispatch(fetchOrders(token))
   }
 }
 

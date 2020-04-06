@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import style from './OrderCell.module.scss';
-import { OrdersInterface } from '../../../containers/Orders/types';
+import { OrdersProps } from '../../../containers/Orders/types';
 
-function OrderCell(props: OrdersInterface): ReactElement {
+function OrderCell(props: OrdersProps): ReactElement {
   const ingreds = Object.keys(props.ingredients).map(id => (
     <div className={style.ingred} id={id} key={id}>
       <span>{id}</span>

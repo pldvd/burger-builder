@@ -1,6 +1,6 @@
 import { Ingredients } from '../../components/BurgerControls/BurgerControls';
 
-export interface OrdersInterface {
+export interface OrdersProps {
   ingredients: Ingredients,
   price: number,
   id: string,
