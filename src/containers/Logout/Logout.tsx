@@ -12,7 +12,7 @@ class LogOut extends Component<LogoutProps> {
   }
 
   render() {
-    return <Redirect to='/' />
+    return <Redirect to='/'/>
   }
 }
 
