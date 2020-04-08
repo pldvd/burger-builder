@@ -21,7 +21,7 @@ export const authFail = error => {
   }
 }
 
-const logOut = () => {
+export const logOut = () => {
   return {
     type: actionTypes.AUTH_LOGOUT
   }
