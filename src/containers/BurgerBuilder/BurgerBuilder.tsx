@@ -24,8 +24,11 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
   }
 
   componentDidMount() {
-    this.props.cancel(); //clear orders at every DidMount
-    this.props.init();
+    if (this.props.isPurchased) {
+      this.props.cancel(); //clear orders at every DidMount if the burger was purchased, otherwise do nothing
+    }
+    this.props.init(); //initialize ingredients from redux store (if anything exists there, use it)
+    this.checkIfPurchasable(this.props.ingredients); //check if there are orders, to enable purchase button
   }
 
   componentDidUpdate(prevProps: BurgerBuilderProps, prevState: BurgerBuilderState) {
@@ -70,8 +73,8 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
             changeAmount={this.props.changeAmount}
             price={this.props.finalPrice}
             canPurchase={this.state.isPurchasable}
-            setVisibility={this.setModalVisibility} 
-            hasToken={this.props.token}/>
+            setVisibility={this.setModalVisibility}
+            hasToken={this.props.token} />
         </Fragment>
       )
     }
@@ -100,7 +103,8 @@ const mapStateToProps = (state: any) => {
     isLoading: state.burger.isLoading,
     hasError: state.burger.hasError,
     errorMsg: state.burger.errorMsg,
-    token: !!state.auth.token
+    token: !!state.auth.token,
+    isPurchased: state.order.isPurchased
   }
 }
 

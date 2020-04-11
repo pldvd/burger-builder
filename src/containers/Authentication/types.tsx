@@ -1,3 +1,5 @@
+import {RouteComponentProps} from 'react-router-dom';
+
 export interface AuthStateInterface {
   isLoading: boolean,
   formIsValid: boolean,
@@ -11,7 +13,7 @@ export interface AuthStateInterface {
   [key: string]: string | boolean | string[]
 }
 
-export interface AuthProps {
+export interface AuthProps extends RouteComponentProps{
   authenticate: (email: string, password: string, isSignedUp: boolean) => void,
   isLoading: boolean,
   error: any,

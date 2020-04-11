@@ -27,7 +27,6 @@ const BurgerControls: React.FC<BurgerControlProps> = (props) => {
     if (props.hasToken) {
       props.setVisibility();
     } else {
-      console.log(props);
       props.history.push('/auth');
     }
   }

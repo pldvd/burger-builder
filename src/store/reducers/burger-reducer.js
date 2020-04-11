@@ -26,14 +26,14 @@ const reducer = (state = initialState, action) => {
     case INIT:
       return {
         ...state,
-        ingredients: {
-          salad: action.ingredients.salad,
-          bacon: action.ingredients.bacon,
-          cheese: action.ingredients.cheese,
-          meat: action.ingredients.meat
-        },
+        // ingredients: {
+        //   salad: action.ingredients.salad,
+        //   bacon: action.ingredients.bacon,
+        //   cheese: action.ingredients.cheese,
+        //   meat: action.ingredients.meat
+        // }, 
         isLoading: false,
-        finalPrice: initialState.finalPrice
+        // finalPrice: initialState.finalPrice
       };
     case DOWNLOADFAILED:
       return {

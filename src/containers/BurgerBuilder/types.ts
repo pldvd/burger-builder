@@ -17,6 +17,7 @@ export interface BurgerBuilderProps extends RouteComponentProps {
   hasError: boolean,
   errorMsg: string,
   token: boolean,
+  isPurchased: boolean,
   init: () => BurgerState
 }
 
