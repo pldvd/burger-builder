@@ -13,7 +13,10 @@ const Navigation: React.FC<NavigationProps> = (props) => {
   return (
     <ul className={[styles.Navigation, styles[props.type]].join(' ')}>
       <NavLink to='/hello' activeClassName={styles.activeLink}>Hello</NavLink>
-      {isAuthenticated ? <NavLink to='/orders' activeClassName={styles.activeLink}>Orders</NavLink> : null}
+      {isAuthenticated
+        ? <NavLink to='/orders' activeClassName={styles.activeLink}>Orders</NavLink>
+        : null
+      }
       {isAuthenticated
         ? <NavLink to='/logout' activeClassName={styles.activeLink}>Log-out</NavLink>
         : <NavLink to='/auth' activeClassName={styles.activeLink}>Log-in</NavLink>

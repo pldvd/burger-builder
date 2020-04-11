@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import { auth } from '../../store/actions'; //since we are importing from a file there named index.js, no need to further specify path
 import styles from './Authentication.module.scss';
 import Spinner from '../../components/UI/Loader/Loader';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import authReducer from '../../store/reducers/auth-reducer';
 
 class Authentication extends Component<AuthProps, AuthStateInterface> {
 
@@ -106,12 +107,14 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
       form = <Spinner />
     }
 
+    let authRedirect = null;
     if (this.props.isAuthenticated) {
-      form = <Redirect to="/" />
+      authRedirect = <Redirect to="/" />
     }
 
-    return (
+    return ( 
       <div className={styles.Authentication}>
+        {authRedirect}
         <p className={styles.error}>
           {this.props.error ? this.props.error.message : null}
         </p>
