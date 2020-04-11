@@ -70,7 +70,8 @@ class BurgerBuilder extends Component<BurgerBuilderProps, BurgerBuilderState> {
             changeAmount={this.props.changeAmount}
             price={this.props.finalPrice}
             canPurchase={this.state.isPurchasable}
-            setVisibility={this.setModalVisibility} />
+            setVisibility={this.setModalVisibility} 
+            hasToken={this.props.token}/>
         </Fragment>
       )
     }
@@ -98,7 +99,8 @@ const mapStateToProps = (state: any) => {
     finalPrice: state.burger.finalPrice,
     isLoading: state.burger.isLoading,
     hasError: state.burger.hasError,
-    errorMsg: state.burger.errorMsg
+    errorMsg: state.burger.errorMsg,
+    token: !!state.auth.token
   }
 }
 
