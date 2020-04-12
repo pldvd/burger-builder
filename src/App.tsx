@@ -10,7 +10,12 @@ import { checkAuth } from './store/actions/auth-actions';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-const App = (props: any) => {
+interface AppProps {
+  checkAuth: (data: string | null) => () => {type: string, authData?: string},
+  isAuthenticated: boolean
+}
+
+const App:React.FC<AppProps> = (props) => {
 
   useEffect(() => {
     const authData = localStorage.getItem('authData');
@@ -51,13 +56,13 @@ const App = (props: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    isAuthenticated: state.auth.token,
+    isAuthenticated: !!state.auth.token,
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    checkAuth: (token: string) => dispatch(checkAuth(token))
+    checkAuth: (token: string |null) => dispatch(checkAuth(token))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
