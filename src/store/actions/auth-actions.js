@@ -71,12 +71,12 @@ export const checkAuth = (data) => {
   return dispatch => {
     if (authData) {
       const token = authData.idToken;
-      const expiry = jwtDecode(token).exp;
-      const now = Date.now();
-
-      if (expiry > now) {
+      const expiry = jwtDecode(token).exp; //seconds since Unix epoch
+      const now = Date.now() / 1000; //need to divide by 1000 because this Date.now() measure time in miliseconds since Unix epoch
+      console.log(expiry, now);
+      if (expiry < now) {
         dispatch(logOut());
-      } else if (expiry < now) {
+      } else if (expiry > now) {
         dispatch(authSuccess(authData))
       }
     }
