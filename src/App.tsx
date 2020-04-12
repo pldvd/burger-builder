@@ -8,7 +8,7 @@ import LogOut from './containers/Logout/Logout';
 import { connect } from 'react-redux';
 import { checkAuth } from './store/actions/auth-actions';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 const App = (props: any) => {
 
@@ -17,21 +17,42 @@ const App = (props: any) => {
     props.checkAuth(authData);
   }, [])
 
+  let routes = (
+    <Switch>
+      <Route path='/auth' component={Authentication} />
+      <Route path='/' exact component={BurgerBuilder} />
+      <Redirect to='/'/>
+    </Switch>
+  )
+
+  if (props.isAuthenticated) {
+    routes = (
+      <Switch>
+        <Route path='/orders' component={Orders} />
+        <Route path='/checkout' component={Checkout} />
+        <Route path='/auth' component={Authentication} />
+        <Route path='/logout' component={LogOut} />
+        <Route path='/' exact component={BurgerBuilder} />
+        <Redirect to='/'/>
+      </Switch>
+    )
+  }
+
   return (
     <div>
       <BrowserRouter>
         <Layout>
-          <Switch>
-            <Route path='/orders' component={Orders} />
-            <Route path='/checkout' component={Checkout} />
-            <Route path='/auth' component={Authentication} />
-            <Route path='/logout' component={LogOut} />
-            <Route path='/' component={BurgerBuilder} />
-          </Switch>
+          {routes}
         </Layout>
       </BrowserRouter>
     </div>
   );
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+    isAuthenticated: state.auth.token,
+  }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
@@ -39,4 +60,4 @@ const mapDispatchToProps = (dispatch: any) => {
     checkAuth: (token: string) => dispatch(checkAuth(token))
   }
 }
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
