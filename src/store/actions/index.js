@@ -2,7 +2,7 @@ export {
   changeAmount,
   cancel,
   init,
-  failedToDownload
+  // failedToDownload
 } from './burger-actions';
 
 export {
