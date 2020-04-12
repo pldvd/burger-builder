@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
+import jwtDecode from 'jwt-decode';
 
 export const authStart = () => {
   return {
@@ -22,8 +23,7 @@ export const authFail = error => {
 }
 
 export const logOut = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('expiresIn');
+  localStorage.removeItem('authData');
   return {
     type: actionTypes.AUTH_LOGOUT
   }
@@ -41,7 +41,6 @@ export const checkTimeAndLogout = (time) => {
 
 export const auth = (email, password, isSignedUp) => {
   const authVariable = isSignedUp ? 'signInWithPassword' : 'signUp';
-
   return dispatch => {
     dispatch(authStart())
     axios({
@@ -54,8 +53,8 @@ export const auth = (email, password, isSignedUp) => {
       }
     })
       .then(response => {
-        const { idToken, expiresIn } = response.data;
-        localStorage.setItem('token', idToken);
+        const { idToken } = response.data;
+        localStorage.setItem('authData', JSON.stringify(response.data));
         console.log(response.data);
         dispatch(authSuccess(response.data));
         dispatch(checkTimeAndLogout(response.data.expiresIn));
@@ -66,10 +65,20 @@ export const auth = (email, password, isSignedUp) => {
   }
 }
 
-export const checkAuth = (token, expiry) => {
-  
+export const checkAuth = (data) => {
+  const authData = JSON.parse(data);
+
   return dispatch => {
-    //success => logIn
-    //failure => logOut
+    if (authData) {
+      const token = authData.idToken;
+      const expiry = jwtDecode(token).exp;
+      const now = Date.now();
+
+      if (expiry > now) {
+        dispatch(logOut());
+      } else if (expiry < now) {
+        dispatch(authSuccess(authData))
+      }
+    }
   }
 }
