@@ -20,6 +20,7 @@ const App:React.FC<AppProps> = (props) => {
   useEffect(() => {
     const authData = localStorage.getItem('authData');
     props.checkAuth(authData);
+    // eslint-disable-next-line
   }, [])
 
   let routes = (

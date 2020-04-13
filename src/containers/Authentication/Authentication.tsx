@@ -7,7 +7,6 @@ import { auth } from '../../store/actions'; //since we are importing from a file
 import styles from './Authentication.module.scss';
 import Spinner from '../../components/UI/Loader/Loader';
 import { Redirect } from 'react-router-dom';
-import authReducer from '../../store/reducers/auth-reducer';
 
 class Authentication extends Component<AuthProps, AuthStateInterface> {
 

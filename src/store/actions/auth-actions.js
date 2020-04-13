@@ -53,7 +53,6 @@ export const auth = (email, password, isSignedUp) => {
       }
     })
       .then(response => {
-        const { idToken } = response.data;
         localStorage.setItem('authData', JSON.stringify(response.data));
         console.log(response.data);
         dispatch(authSuccess(response.data));

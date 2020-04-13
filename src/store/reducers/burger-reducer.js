@@ -57,6 +57,7 @@ const reducer = (state = initialState, action) => {
           finalPrice: state.finalPrice + IngredientPriceList[ingred],
         }
       }
+    // eslint-disable-next-line
     case CANCELORDERS:
       return {
         ...initialState,

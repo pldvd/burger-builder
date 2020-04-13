@@ -7,7 +7,6 @@ import WithErrorHandler from '../../hoc/WithErrorHandler';
 import axios from '../../axios';
 import Loader from '../../components/UI/Loader/Loader';
 import { BurgerBuilderState, BurgerBuilderProps } from './types';
-import { BurgerState } from '../../store/types';
 import { changeAmount, cancel, init } from '../../store/actions/index';
 import { connect } from 'react-redux';
 

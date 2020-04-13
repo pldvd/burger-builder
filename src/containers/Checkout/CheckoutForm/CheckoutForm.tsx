@@ -4,10 +4,8 @@ import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import Loader from '../../../components/UI/Loader/Loader';
 import styles from './CheckoutForm.module.scss';
-import Axios from '../../../axios';
 import { orderDataInterface, CheckoutFormInterface, CheckoutFormProps } from './types';
 import { connect } from 'react-redux';
-import { BurgerState } from '../../../store/types';
 import { orderStartLoading, placeOrder } from '../../../store/actions/order-actions';
 
 
