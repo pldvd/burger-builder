@@ -14,7 +14,7 @@ const SideDrawer: React.FC<SideDrawerProps> = (props) => {
       transform: props.isOpen ? 'translateY(0)' : 'translateY(-100%)'
     }}>
       <p className={styles.close} onClick={props.sideControl}>&times;</p>
-      <Navigation type='sideDrawer'/>
+      <Navigation type='sideDrawer' sideControl={props.sideControl}/>
     </div>
   )
 }

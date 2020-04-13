@@ -12,7 +12,7 @@ const Toolbar: React.FC<ToolBarProps> = (props) => {
   return (
     <header className={styles.Toolbar}>
       <img src={logoImage} alt={'Burger logo'} />
-      <Navigation type='header' />
+      <Navigation type='header' sideControl={props.sideControl}/>
       <HamburgerIcon sideControl={props.sideControl}/>
     </header>
   )

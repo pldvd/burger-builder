@@ -4,14 +4,20 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 interface NavigationProps {
-  type: string
+  type: string,
+  sideControl: () => void
 }
 
 const Navigation: React.FC<NavigationProps> = (props) => {
   const isAuthenticated = useSelector((state: any) => !!state.auth.token);
 
+  const handleClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    target.tagName === 'A' && props.sideControl();
+  }
+
   return (
-    <ul className={[styles.Navigation, styles[props.type]].join(' ')}>
+    <ul className={[styles.Navigation, styles[props.type]].join(' ')} onClick={handleClick}>
       <NavLink to='/hello' activeClassName={styles.activeLink}>Hello</NavLink>
       {isAuthenticated
         ? <NavLink to='/orders' activeClassName={styles.activeLink}>Orders</NavLink>
