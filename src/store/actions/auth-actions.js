@@ -54,7 +54,6 @@ export const auth = (email, password, isSignedUp) => {
     })
       .then(response => {
         localStorage.setItem('authData', JSON.stringify(response.data));
-        console.log(response.data);
         dispatch(authSuccess(response.data));
         dispatch(checkTimeAndLogout(response.data.expiresIn));
       })
@@ -72,7 +71,6 @@ export const checkAuth = (data) => {
       const token = authData.idToken;
       const expiry = jwtDecode(token).exp; //seconds since Unix epoch
       const now = Date.now() / 1000; //need to divide by 1000 because this Date.now() measure time in miliseconds since Unix epoch
-      console.log(expiry, now);
       if (expiry < now) {
         dispatch(logOut());
       } else if (expiry > now) {

@@ -60,7 +60,6 @@ class Authentication extends Component<AuthProps, AuthStateInterface> {
 
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('csumi');
     this.props.authenticate(this.state.email, this.state.password, this.state.isSignedUp);
   }
 
