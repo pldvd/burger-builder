@@ -1,5 +1,6 @@
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import Navigation from './Navigation';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -25,6 +26,11 @@ describe("NavComponent", () => {
   afterEach(() => {
     useSelector.mockClear();
   });
+
+  it('should render without crashing', () => {
+    const root = document.createElement('div');
+    ReactDOM.render(<Router><Navigation /></Router>, root);
+  })
 
   it('should not contain log-out if user is not authenticated', () => {
     const { queryByText } = render(<Router><Navigation /></Router>);
