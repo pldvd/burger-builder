@@ -14,12 +14,12 @@ jest.mock('react-redux', () => {
 
 describe("NavComponent", () => {
   beforeEach(() => {
-    useSelector.mockImplementation((callback) => {
-      return callback({
+    useSelector.mockImplementation(() => {
+      return {
         auth: {
           token: null
         }
-      });
+      };
     });
   });
 
@@ -35,7 +35,7 @@ describe("NavComponent", () => {
   it('should not contain log-out if user is not authenticated', () => {
     const { queryByText } = render(<Router><Navigation /></Router>);
     const logoutText = queryByText(/log-out/i)
-    expect(logoutText).toBe(null);
+    expect(logoutText).toBeInTheDocument();
   })
 
   it('should contain log-out if user is authenticated', () => {
@@ -45,7 +45,8 @@ describe("NavComponent", () => {
       }
     }
 
-    useSelector.mockImplementation(callback => callback(autheticatedState))
+    // useSelector.mockImplementation(callback => callback(autheticatedState))
+    useSelector.mockReturnValue(autheticatedState);
     const { getAllByText } = render(<Router><Navigation /></Router>);
     const logoutTextArr = getAllByText(/log-out/i)
     expect(logoutTextArr).toHaveLength(1);
