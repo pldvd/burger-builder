@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, cleanup, fireEvent, screen } from '@testing-library/react';
 import BurgerControl from './BurgerControl';
 
 describe('BurgerControl', () => {
@@ -8,15 +8,15 @@ describe('BurgerControl', () => {
 
   it('renders without an error', () => {
 
-    const { getByTestId } = render(<BurgerControl amoun={1} name="salad" />);
-    const component = getByTestId('BurgerControlComponent');
+    render(<BurgerControl amount={1} name="salad" />);
+    const component = screen.getByTestId('BurgerControlComponent');
     expect(component).toBeInTheDocument();
   })
 
   test('decrement button is disabled, if amount prop is 0', () => {
 
-    const { getByText } = render(<BurgerControl amount={0} name="salad" />);
-    const lessButton = getByText(/less/i);
+    render(<BurgerControl amount={0} name="salad" />);
+    const lessButton = screen.getByRole('button', {name: 'Less'});
     expect(lessButton).toHaveAttribute('disabled');
   })
 
@@ -36,10 +36,10 @@ describe('BurgerControl', () => {
       }
     })
 
-    const { getByText, getByTestId, rerender } = render(<BurgerControl changeAmount={myMock} amount={currentCount} name="salad" />);
-    const lessButton = getByText(/less/i);
-    const moreButton = getByText(/more/i);
-    const ingredientAmount = getByTestId('ingredientAmount');
+    const {rerender} = render(<BurgerControl changeAmount={myMock} amount={currentCount} name="salad" />);
+    const lessButton = screen.getByRole('button', {name: /less/i});
+    const moreButton = screen.getByRole('button', {name: /more/i});
+    const ingredientAmount = screen.getByTestId('ingredientAmount');
     fireEvent.click(moreButton);
     fireEvent.click(moreButton);
     fireEvent.click(moreButton);
